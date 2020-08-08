@@ -1,0 +1,48 @@
+{
+  "name": "gatuno",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.2.1",
+    "ascii-table": "0.0.9",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "firebase": "^7.14.3",
+    "fs": "0.0.1-security",
+    "hyper-horizon-theme": "^1.0.9",
+    "init": "^0.1.2",
+    "jimp": "^0.6.8",
+    "moment": "^2.25.3",
+    "moment-duration-format": "^2.3.2",
+    "node-pre-gyp": "^0.14.0",
+    "opus": "0.0.0",
+    "quick.db": "^7.1.1",
+    "simple-youtube-api": "^5.2.1",
+    "ytdl-core": "^3.1.2",
+    "ytdl-core-discord": "^1.2.0",
+    "parse-ms": "^2.0.0",
+    "@vitalets/google-translate-api": "^3.0.0",
+    "better-youtube-api": "^2.1.7",
+    "canvas": "^2.6.1",
+    "node-superfetch": "^0.1.10",
+    "superagent": "^5.2.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/gatuno"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
