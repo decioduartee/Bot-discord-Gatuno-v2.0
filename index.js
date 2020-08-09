@@ -210,6 +210,7 @@ client.on("message", async message => {
   const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
   if (!cmd) return null;
 
+  cmd.run(client, message, args, database);
   /* if (!message.content.startsWith(prefix)) return;
 
   if (!message.member)
