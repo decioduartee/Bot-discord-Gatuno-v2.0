@@ -31,4 +31,6 @@ module.exports = client => {
   }
   st();
   setInterval(() => st(), 10000);
+
+  client.user.setPresence({ activity: { name: `Transformando seu servidor em um lugar melhor :3` }, status: 'idle' })
 };
