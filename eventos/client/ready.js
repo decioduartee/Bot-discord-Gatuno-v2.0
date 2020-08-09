@@ -18,10 +18,10 @@ module.exports = client => {
     { name: `${client.guilds.cache.size.toLocaleString()} servidores em meus dados`, type: "PLAYING"},
     { name: `amor para ${client.users.cache.size.toLocaleString()} usúarios`, type: "STREAMING", url: "https://www.twitch.tv/spaykxd"},
     { name: `musica em ${client.channels.cache.size.toLocaleString()} canais`, type: "LISTENING" },
-    { name: `meu prefix | g.`, type: "LISTENING" },
+    { name: `meu prefix | .`, type: "LISTENING" },
     { name: `bolas de lã 🏐`, type: "PLAYING" },
-    { name: `g.ajuda 🐱📃`, type: "LISTENING" },
-    { name: `g.play 🎧🎶`, type: "LISTENING" }
+    { name: `.ajuda 🐱📃`, type: "LISTENING" },
+    { name: `.play 🎧🎶`, type: "LISTENING" }
     
   ];
   

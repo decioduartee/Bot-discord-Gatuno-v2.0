@@ -132,11 +132,6 @@ client.on("message", async message => {
 
 //____________________________Sistemna de level_______________________________________
 
-  //comando para o bot não responder dm's
-  
-  //if (message.author.bot && message.guild) return;
-  //if (message.channel.type === "dm") return;
-
   let xp = "";
   let cats = "";
   let nextlevel = "";
@@ -211,34 +206,7 @@ client.on("message", async message => {
   if (!cmd) return null;
 
   cmd.run(client, message, args, database);
-  /* if (!message.content.startsWith(prefix)) return;
-
-  if (!message.member)
-    message.member = await message.guild.fetchMember(message);
-
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const cmd = args.shift().toLowerCase();
-
-  if (cmd.length === 0) return;
-
-  let comando = client.comandos.get(cmd);
-  if (!comando) comando = client.comandos.get(client.aliases.get(cmd));
-
-  if (comando) {
-    comando.run(client, message, args, database);
-  } else {
-    message.react("🔍");
-    message.delete({ timeout: 40000 });
-
-    message
-      .reply({
-        embed: {
-          color: "#2f3136",
-          description: `<:listadecomandos:706682302989860876> Chequei meus comandos e não encontrei \`${prefix}${cmd}\` Por Favor use \`${prefix}ajuda\`` //+ err.message
-        }
-      })
-      .then(message => message.delete({ timeout: 40000 }));
-  } */
+  
 });
 
 //----------------------------------------------------------------------------------
