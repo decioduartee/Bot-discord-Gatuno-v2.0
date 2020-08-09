@@ -8,9 +8,7 @@ Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
 const client = new Discord.Client(
   { partials: ["MESSAGE", "CHANNEL", "REACTION"] },
-  new Discord.Client({
-    disableEveryone: true
-  })
+  new Discord.Client({ disableEveryone: true })
 );
 
 var firebaseConfig = {
