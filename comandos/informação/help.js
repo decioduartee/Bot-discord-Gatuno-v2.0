@@ -10,13 +10,18 @@ module.exports = {
         message.delete({ timeout: 5000})
 
         const embed1 = new MessageEmbed()
-        .setColor('#206694')
+        .setColor('#2f3136')
         .setAuthor(message.author.username, message.author.displayAvatarURL())
-        .setDescription(`<:send:715353578742480907> **|** Enviei no seu privado! Caso não chegue nada, habilite as mensagens diretas de membros do Servidor..`)
-        message.channel.send(embed1).then(msg => msg.delete({ timeout: 50000 }))
+        .setDescription(`<:enviado:742152771951656962> **|** Enviei minha lista de comandos no seu privado!`)
+        message.channel.send(embed1).then(msg => msg.delete({ timeout: 50000 })).catch(() => { 
+          const embed = new MessageEmbed()
+            .setColor('#2f3136')
+            .setDescription("<:errado:736447664329326613> **| ERRO AO ENVIAR:** habilite as mensagens diretas de membros do Servidor")
+          message.channel.send(embed)
+        })
 
         const embed2 = new MessageEmbed()
-            .setColor('#206694')
+            .setColor('#2f3136')
             .setTitle('CENTRAL DE AJUDA!')
             .setThumbnail('https://cdn.discordapp.com/attachments/705905702648152144/706315531153833994/gatuno_ajuda.png')
             .setDescription(`Para ter acesso a lista de comandos, reaja com algum emoji e receba as informações necessárias.\n\n🔨 \`Moderação\`\n🔧 \`Uteís\`\n🎧 \`Música\`\n👾 \`Diversão\`\n\nMeu site: [\`www.bot-gatuno.com.br\`](https://web-gatuno.glitch.me/#Inicio)`)
@@ -41,7 +46,7 @@ module.exports = {
 
             mod.on('collect', r => {
                 const embed3 = new MessageEmbed()
-                .setColor('#206694')
+                .setColor('#2f3136')
                 .setTitle('COMANDOS DE MODERAÇÃO')
                 .addField(`**.addemoji**`, 'adicione um emoji ao seu servidor')
                 .addField(`**.addrole**`, 'adicione um cargo em um membro')
@@ -69,7 +74,7 @@ module.exports = {
 
             util.on('collect', r => {
                 const embed4 = new MessageEmbed()
-                .setColor('#206694')
+                .setColor('#2f3136')
                 .setTitle('COMANDOS ÚTEIS')
                 .addField('**.afk**', 'Use esse comando para ficar AFK')
                 .addField('**.bug**', 'Informe um bug diretamente para meu desenvolvedor')
@@ -94,7 +99,7 @@ module.exports = {
           
             musica.on('collect', r => {
               const embed5 = new MessageEmbed()
-              .setColor('#206694')
+              .setColor('#2f3136')
               .setTitle('COMANDOS DE MÚSICA')
               .addField('**.play**', 'Use para tocar uma música. ║ Variação: ".play url da música" ● ".play nome da música"')
               .addField('**.pause**', 'Use para pausar a música que está tocando.')
@@ -114,7 +119,7 @@ module.exports = {
 
           div.on('collect', r => {
               const embed6 = new MessageEmbed()
-              .setColor('#206694')
+              .setColor('#2f3136')
               .setTitle('COMANDOS DE DIVERSÂO')
               .addField('**.abraçar**', 'Use para abraçar um membro.')
               .addField('**.clyde**', 'Use para fazer a bot clyde falar alguma coisa.')
