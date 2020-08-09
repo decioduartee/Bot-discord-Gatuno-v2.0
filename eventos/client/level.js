@@ -1,5 +1,6 @@
 module.exports = async (client, message ) => {
     
+    const jimp = require("jimp");
     const firebase = require('firebase')
     const database = firebase.database()
     

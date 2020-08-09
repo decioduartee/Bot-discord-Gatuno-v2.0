@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const { prefix, token } = require("./config.json");
-const jimp = require("jimp");
 const firebase = require("firebase");
 const db = require(`quick.db`);
 //const Constants = require("discord.js/src/util/Constants.js");
