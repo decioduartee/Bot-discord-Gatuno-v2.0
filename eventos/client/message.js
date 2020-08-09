@@ -23,5 +23,12 @@ module.exports = async (client, message ) => {
     const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
     if (!cmd) return null;
 
+    if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
+        return message.reply(`I need \`${cmd.botPerm.join('`, `')}\` permissions for work correctly`);
+    };
+    if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
+        return message.reply(`You need \`${cmd.userPerm.join('`, `')}\` for this command`);
+    };
+
     cmd.run(client, message, args, database);
 }
