@@ -1,5 +1,21 @@
 module.exports = async (client, message ) => {
 
+    const firebaseConfig = {
+        apiKey: "AIzaSyCvameiSh9UygMOBgckn9jpVDYnyLbRcz0",
+        authDomain: "gatuno-bot.firebaseapp.com",
+        databaseURL: "https://gatuno-bot.firebaseio.com",
+        projectId: "gatuno-bot",
+        storageBucket: "gatuno-bot.appspot.com",
+        messagingSenderId: "169162698827",
+        appId: "1:169162698827:web:f4e3848d74805a3bac9dce",
+        measurementId: "G-1N2TPXXEGL"
+      };
+      
+    firebase.initializeApp(firebaseConfig);
+      
+    const database = firebase.database();
+
+
     const { MessageEmbed } = require("discord.js")
     const { prefix } = require("../../config.json");
 
