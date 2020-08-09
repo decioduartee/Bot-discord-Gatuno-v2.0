@@ -1,14 +1,11 @@
-module.exports = async (oldMessage, newMessage) => {
-
-    const firebase = require('firebase')
-    const database = firebase.database()
-    const { MessageEmbed } = require("discord.js")
-
+module.exports = async (client, message ) => {
+    
+    client.on("messageUpdate", async (oldMessage, newMessage) => {
     if (oldMessage.content === newMessage.content) {
       return;
     }
   
-    let EditEmbed = new MessageEmbed()
+    let EditEmbed = new Discord.MessageEmbed()
       .setAuthor(`Mensagem Editada`, newMessage.guild.iconURL({dynamic: true}))
       .setColor("#2f3136")
       .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
@@ -20,4 +17,5 @@ module.exports = async (oldMessage, newMessage) => {
     const canal = newMessage.guild.channels.cache.get(canais)
     if (!canal) return;
     canal.send(EditEmbed);
+  })
 }
