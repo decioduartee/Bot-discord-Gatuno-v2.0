@@ -1,22 +1,3 @@
-const express = require("express");
-const http = require("http")
-const app = express();
-
-app.use(express.static("public"))
-app.get("/", (request, response) => {
-  response.sendStatus(200)
-  const ping = new Date();
-  ping.setHours(ping.getHours() - 3);
-  console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
-});
-
-const listener = app.listen(process.env.PORT, function() {})
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`)
-}, 270000)
-
-//app.listen(process.env.PORT); // Recebe solicitações que o deixa online
-  
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const jimp = require("jimp");
