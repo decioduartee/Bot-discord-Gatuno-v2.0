@@ -133,7 +133,15 @@ client.on("message", async message => {
 //____________________________Sistemna de level_______________________________________
 
   //comando para o bot não responder dm's
-  if (message.author.bot && message.guild) return;
+
+  if (message.author.bot || message.system) return null;
+  if (!message.content.startsWith(client.config.prefix)) return null;
+  const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
+  const comando = args.shift().toLowerCase();
+  const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
+  if (!cmd) return null;
+  
+  //if (message.author.bot && message.guild) return;
   if (message.channel.type === "dm") return;
 
   let xp = "";
