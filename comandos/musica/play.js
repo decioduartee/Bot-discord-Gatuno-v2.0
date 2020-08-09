@@ -1,10 +1,9 @@
 const { MessageEmbed } = require("discord.js")
-
 const { Util } = require("discord.js");
-const { QUEUE_LIMIT, prefix} = require("../../config.json");
+const { YOUTUBE_API_KEY, QUEUE_LIMIT, prefix} = require("../../config.json");
 const ytdl = require("ytdl-core");
 const YoutubeAPI = require("simple-youtube-api");
-const youtube = new YoutubeAPI(process.env.youtubeapi);
+const youtube = new YoutubeAPI(YOUTUBE_API_KEY);
 const { play } = require("../system/music.js");
 
 module.exports = {
