@@ -1,7 +1,7 @@
 module.exports = async (client, message ) => {
 
     const { MessageEmbed } = require("discord.js")
-    const { prefix } = require("./config.json");
+    const { prefix } = require("../config.json");
 
     if (message.author.bot || message.system) return null;
     if (!message.content.startsWith(prefix)) return null;
