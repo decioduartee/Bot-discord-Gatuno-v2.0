@@ -9,16 +9,12 @@ module.exports = {
     run: async(client, message, args) => {
         message.delete({ timeout: 5000})
 
-          const embed1 = new MessageEmbed()
-            .setColor('#2f3136')
-            .setDescription(`<:enviado:742152771951656962> **|** Enviei minha lista de comandos no seu privado!`)
-          message.channel.send(embed1).catch((e) => {
-            console.log(e)
-          const embed = new MessageEmbed()
-            .setColor('#2f3136')
-            .setDescription("<:errado:736447664329326613> **| ERRO AO ENVIAR:** habilite as mensagens diretas de membros do Servidor")
-          message.channel.send(embed).then(msg => msg.delete({ timeout: 50000 }))
-          })
+        try {
+
+        const embed1 = new MessageEmbed()
+          .setColor('#2f3136')
+          .setDescription(`<:enviado:742152771951656962> **|** Enviei minha lista de comandos no seu privado!`)
+        message.channel.send(embed1)
 
         const embed2 = new MessageEmbed()
             .setColor('#2f3136')
@@ -137,6 +133,13 @@ module.exports = {
           })
           
       })
+
+    } catch {
+      const embed = new MessageEmbed()
+        .setColor('#2f3136')
+        .setDescription("<:errado:736447664329326613> **| ERRO AO ENVIAR:** habilite as mensagens diretas de membros do Servidor")
+      message.channel.send(embed).then(msg => msg.delete({ timeout: 50000 }))
     }
+  }
 }
 
