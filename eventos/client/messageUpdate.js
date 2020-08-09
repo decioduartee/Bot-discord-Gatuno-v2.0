@@ -2,12 +2,13 @@ module.exports = async (oldMessage, newMessage) => {
 
     const firebase = require('firebase')
     const database = firebase.database()
-    
+    const { MessageEmbed } = require("discord.js")
+
     if (oldMessage.content === newMessage.content) {
       return;
     }
   
-    let EditEmbed = new Discord.MessageEmbed()
+    let EditEmbed = new MessageEmbed()
       .setAuthor(`Mensagem Editada`, newMessage.guild.iconURL({dynamic: true}))
       .setColor("#2f3136")
       .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
