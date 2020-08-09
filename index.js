@@ -204,8 +204,8 @@ client.on("message", async message => {
 //_______________________________final do comando de level___________________
 
   if (message.author.bot || message.system) return null;
-  if (!message.content.startsWith(client.config.prefix)) return null;
-  const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
+  if (!message.content.startsWith(prefix)) return null;
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLowerCase();
   const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
   if (!cmd) return null;
