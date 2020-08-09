@@ -1,9 +1,8 @@
 const { MessageEmbed, Util } = require("discord.js")
-const { YOUTUBE_API_KEY } = require('../../config.json')
 const YoutubeAPI = require("simple-youtube-api");
-const youtube = new YoutubeAPI(YOUTUBE_API_KEY);
+const youtube = new YoutubeAPI(process.env.youtubeapi);
 const ytdl = require('ytdl-core');
-const ytdlDiscord = require('ytdl-core-discord')
+//const ytdlDiscord = require('ytdl-core-discord')
 
 module.exports = {
     name: "pesquisar",
