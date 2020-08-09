@@ -3,8 +3,8 @@ const { prefix, token } = require("./config.json");
 const jimp = require("jimp");
 const firebase = require("firebase");
 const db = require(`quick.db`);
-const Constants = require("discord.js/src/util/Constants.js");
-Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
+//const Constants = require("discord.js/src/util/Constants.js");
+//Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
 const client = new Discord.Client(
   { partials: ["MESSAGE", "CHANNEL", "REACTION"] },
