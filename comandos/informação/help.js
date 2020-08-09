@@ -9,7 +9,6 @@ module.exports = {
     run: async(client, message, args) => {
         message.delete({ timeout: 5000})
 
-        try {
           const embed1 = new MessageEmbed()
             .setColor('#2f3136')
             .setDescription(`<:enviado:742152771951656962> **|** Enviei minha lista de comandos no seu privado!`)
