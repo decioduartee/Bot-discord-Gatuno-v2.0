@@ -19,7 +19,7 @@ module.exports = {
     const serverQueue = client.queue.get(message.guild.id);
 
     if (!serverQueue) {
-      embed.setAuthor("The Queue is empty");
+      embed.setAuthor("A fila está vazia");
       return message.channel.send(embed);
     }
 
