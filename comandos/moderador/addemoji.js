@@ -1,19 +1,11 @@
 module.exports = {
   name: "addemoji",
   aliases: [],
+  userPerm: ["MANAGE_EMOJIS"],
+  botPerm: ["MANAGE_EMOJIS"],
   category: "moderador",
   run: async (client, message, args) => {
     const { MessageEmbed } = require("discord.js");
-
-    if (!message.guild.me.hasPermission("MANAGE_EMOJIS")) {
-      const embed = new MessageEmbed()
-          .setColor("#2f3136")
-          .setDescription(`<:errado:736447664329326613> **| ERRO AO ADICIONAR O EMOJI** \n\n • Eu não tenho a permissão \`MANAGE_EMOJIS\``)
-          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-          .setTimestamp()
-        message.channel.send(embed)
-      return;
-    }
 
     if (!args[0]) {
       const embed = new MessageEmbed()
@@ -29,16 +21,6 @@ module.exports = {
       const embed = new MessageEmbed()
           .setColor("#2f3136")
           .setDescription(`<:errado:736447664329326613> **| ERRO AO ADICIONAR O EMOJI** \n\n • Você precisa colocar o URL desse emoji`)
-          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-          .setTimestamp()
-        message.channel.send(embed)
-      return;
-    }
-    
-    if (!message.member.hasPermission("MANAGE_EMOJIS")) {
-      const embed = new MessageEmbed()
-          .setColor("#2f3136")
-          .setDescription(`<:errado:736447664329326613> **| ERRO AO ADICIONAR O EMOJI** \n\n • Você não possui a permissão \`MANAGE_EMOJIS\``)
           .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
           .setTimestamp()
         message.channel.send(embed)

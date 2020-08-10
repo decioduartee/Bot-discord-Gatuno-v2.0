@@ -7,6 +7,8 @@ module.exports = {
     category: "moderador",
     description: "puni membros",
     accessableby: "Moderador",
+    userPerm: ["BAN_MEMBERS", "KICK_MEMBERS", "MUTE_MEMBERS"],
+    botPerm: ["BAN_MEMBERS", "KICK_MEMBERS", "MUTE_MEMBERS"],
     run: async (client, message, args, database) => {
       
       try {

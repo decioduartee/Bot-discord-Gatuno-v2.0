@@ -1,9 +1,10 @@
 module.exports = {
-name: "addallrole",
-description: "Adicione um cargo em todos os membros do servidor",
-userPerm: ["ADMINISTRATOR"],
-aliases: ["addallr", "allrole"],
-run: async (client, message, args) => {
+    name: "addallrole",
+    description: "Adicione um cargo em todos os membros do servidor",
+    userPerm: ["ADMINISTRATOR"],
+    botPerm: ["MANAGE_ROLES"],
+    aliases: ["addallr", "allrole"],
+  run: async (client, message, args) => {
   
   const { MessageEmbed } = require("discord.js")
   
@@ -19,16 +20,16 @@ run: async (client, message, args) => {
       return;
     }
 
-  message.guild.members.cache.filter(m => !m.user.bot).forEach(member => member.roles.add(role)) 
+    message.guild.members.cache.filter(m => !m.user.bot).forEach(member => member.roles.add(role)) 
   
-  setTimeout(() => {
-    let membros = message.guild.members.cache.filter(m => !m.user.bot).size;
-    const embed = new MessageEmbed()
-      .setColor("#2f3136")
-      .setDescription(`<:certo:736447597102760007> **| SUCESSO AO ADICIONAR O CARGO**`)
-      .addField("**• Informações**", `▪︎ **Cargo adicionado:** ${role} \n **▪︎ Adicionado há:** ${membros} Membros`)
-      .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
-    message.channel.send(embed)
-  }, 600)
+    setTimeout(() => {
+      let membros = message.guild.members.cache.filter(m => !m.user.bot).size;
+      const embed = new MessageEmbed()
+        .setColor("#2f3136")
+        .setDescription(`<:certo:736447597102760007> **| SUCESSO AO ADICIONAR O CARGO**`)
+        .addField("**• Informações**", `▪︎ **Cargo adicionado:** ${role} \n **▪︎ Adicionado há:** ${membros} Membros`)
+        .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
+      message.channel.send(embed)
+    }, 600)
   }
 }

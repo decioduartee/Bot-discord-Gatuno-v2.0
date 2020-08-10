@@ -2,6 +2,8 @@ module.exports = {
   name: "removercanal",
   aliases: ["remover-canal", "removechannel"],
   category: "moderador",
+  userPerm: ["MANAGE_CHANNELS"],
+  botPerm: ["MANAGE_CHANNELS"],
   run: async (client, message, args) => {
     
     const { MessageEmbed } = require("discord.js");
@@ -9,26 +11,6 @@ module.exports = {
 
     
     try {
-        if (!message.member.hasPermission("MANAGE_CHANNELS")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê não tem a permisão \`MANAGE_CHANNELS\``)
-            .setFooter(`Atenciosamente, ${client.mentions.channels}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-
-        if (!message.guild.me.hasPermission("MANAGE_CHANNELS")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`MANAGE_CHANNELS\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-      
       if (!args[0]) {
         const embed = new MessageEmbed()
             .setColor("#e74c3c")
@@ -42,14 +24,14 @@ module.exports = {
       if(message.mentions.channels.first()){
         const feito = new MessageEmbed()
           .setDescription(`<:okay:715354134231908372> **Canal apagado com sucesso**\n\n<:logs:716194178035482635> Nome do canal: ${canal}`)
-          .setColor('#206694')
+          .setColor('#2f3136')
           canal.delete()
           message.channel.send(feito)
         return;
       } else if(message.guild.channels.cache.get(args[0])){
         const feito = new MessageEmbed()
           .setDescription(`<:okay:715354134231908372> **Canal apagado com sucesso**\n\n<:logs:716194178035482635> Canal deletado por id`)
-          .setColor('#206694')
+          .setColor('#2f3136')
           canal.delete()
           message.channel.send(feito)
         return;

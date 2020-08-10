@@ -8,26 +8,9 @@ module.exports = {
         usage: "[nome | nickname | mention | ID] <motivo> (optional)",
         accessableby: "Administrator",
         category: "moderação",
+        userPerm: ["MANAGE_GUILD"],
+        botPerm: ["MANAGE_GUILD"],
     run: async (client, message, args) => {
-        if (!message.member.hasPermission("MANAGE_GUILD")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê não tem a permisão \`MANAGE_GUILD\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-
-        if (!message.guild.me.hasPermission("MANAGE_GUILD")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`MANAGE_GUILD\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
 
         if (!args[0]){
             const embed = new MessageEmbed()

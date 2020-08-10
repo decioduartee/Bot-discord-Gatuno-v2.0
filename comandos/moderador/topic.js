@@ -1,36 +1,18 @@
 module.exports = {
   name: "topic",
   description: "Use esse comando para setar o topico do canal",
+  userPerm: ["MANAGE_CHANNELS"],
+  botPerm: ["MANAGE_CHANNELS"],
   run: async (client, message, args) => {
     
     const { MessageEmbed } = require("discord.js")
-    const config = require("../../config.json")
-
-      if (!message.member.hasPermission("MANAGE_CHANNELS")){
-      const embed = new MessageEmbed()
-        .setColor("#2f3136")
-        .setDescription(`<:errado:736447664329326613> **| ERRO SETAR TOPICO** \n\n • Você não tem a permissão \`MANAGE_CHANNELS\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-    return;
-    }
-
-    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")){
-      const embed = new MessageEmbed()
-        .setColor("#2f3136")
-        .setDescription(`<:errado:736447664329326613> **| ERRO SETAR TOPICO** \n\n • Eu não tenho a permissão \`MANAGE_CHANNELS\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-    return;
-    }
+    const { prefix } = require("../../config.json")
 
     let info = new MessageEmbed()
       .setColor("#2f3136")
       .setDescription("<:errado:736447664329326613> **| ERRO SETAR TOPICO**")
       .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-      .addField("• **Informações:**", `• **Use:** \`${config.prefix}topic\` \n • **Exemplo:** \`${config.prefix}topic #chat-geral < mensagem >\``) 
+      .addField("• **Informações:**", `• **Use:** \`${prefix}topic\` \n • **Exemplo:** \`${prefix}topic #chat-geral < mensagem >\``) 
       .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
   
     const canal = message.mentions.channels.first()

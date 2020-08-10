@@ -8,27 +8,9 @@ module.exports = {
     category: "moderador",
     accessableby: "Administrator",
     aliases: ["ub", "unbanish"],
+    userPerm: ["BAN_MEMBERS"],
+    botPerm: ["BAN_MEMBERS"],
     run: async (client, message, args) => {
-
-        if (!message.member.hasPermission("BAN_MEMBERS")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê não tem a permisão \`BAN_MEMBERS\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-
-        if (!message.guild.me.hasPermission("BAN_MEMBERS")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`BAN_MEMBERS\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
 
         if (!args[0]){
             const embed = new MessageEmbed()

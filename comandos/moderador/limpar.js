@@ -3,29 +3,11 @@ module.exports = {
     description: "limpar o chat",
     aliases: ['limpar', 'clear'],
     category: "moderador",
+    userPerm: ["MANAGE_MESSAGES"],
+    botPerm: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
       
       const { MessageEmbed } = require('discord.js')
-
-      if (!message.member.hasPermission("MANAGE_MESSAGES")){
-        const embed = new MessageEmbed()
-        .setColor("#2f3136")
-        .setDescription(`<:errado:736447664329326613> **| ERRO AO LIMPAR** \n\n • Você não tem a permissão \`MANAGE_MESSAGES\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-      return;
-      }
-  
-      if (!message.guild.me.hasPermission("MANAGE_MESSAGES")){
-        const embed = new MessageEmbed()
-        .setColor("#2f3136")
-        .setDescription(`<:errado:736447664329326613> **| ERRO AO LIMPAR** \n\n • Eu não tenho a permissão \`MANAGE_MESSAGES\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-      return;
-      }
         
         message.delete({ timeout: 5000}).catch(() => {})
             

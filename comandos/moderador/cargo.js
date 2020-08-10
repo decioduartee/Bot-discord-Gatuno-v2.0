@@ -4,28 +4,10 @@ module.exports = {
         name: "cargo",
         aliases: ['rolemembers', 'role'],
         category: "info",
+        userPerm: ["MANAGE_MESSAGES"],
+        botPerm: ["MANAGE_MESSAGES"],
         description: "Mostra a lista de membros com função",
     run: async (client, message, args) => {
-
-        if (!message.member.hasPermission("MANAGE_MESSAGES")){
-            const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER O CARGO** \n\n • Você não tem a permissão \`MANAGE_MESSAGES\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-          return;
-          }
-      
-          if (!message.guild.me.hasPermission("MANAGE_MESSAGES")){
-            const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER O CARGO** \n\n • Eu não tenho a permissão \`MANAGE_MESSAGES\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-          return;
-          }
 
         if (args.includes("@everyone")) return message.channel.send(`${message.author}, **Você não pode mencionar este cargo**`);
         

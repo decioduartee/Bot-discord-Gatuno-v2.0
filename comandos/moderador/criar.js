@@ -1,6 +1,8 @@
 module.exports ={
   name: "criar",
   description: "use para criar um canal am um categoria específica",
+  userPerm: ["MANAGE_CHANNELS"],
+  botPerm: ["MANAGE_CHANNELS"],
   run: async(client, message, args) => {
     
   var server = message.guild;

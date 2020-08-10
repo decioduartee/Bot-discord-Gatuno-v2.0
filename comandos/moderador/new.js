@@ -3,6 +3,8 @@ module.exports = {
   description: "use para informar uma noticia sobre jogos",
   aliases: ["news", "noticia"],
   category: "moderador",
+  userPerm: ["MANAGE_MESSAGES"],
+  botPerm: ["MANAGE_MESSAGES"],
   run: async (client, message, args) => {
     const { MessageEmbed } = require("discord.js");
     

@@ -36,9 +36,10 @@ module.exports = {
               avatar.mask(mask);
               fundo.print(fonte, 100, 28, `${usuarios.user.username}`)
               fundo.print(fonte3, 100, 48, `${mensagem}`);
-              fundo.composite(avatar, 20, 22).write("fakediscord.png");
+              fundo.composite(avatar, 20, 22);
+              fundo.write("fakediscord.png");              
               message.channel.send(``, {files: ["fakediscord.png"] });
           message.channel.stopTyping(true);
-            })
+        })
     }
 }

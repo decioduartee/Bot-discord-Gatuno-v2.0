@@ -1,31 +1,12 @@
 module.exports = {
-name: "removeallrole",
-description: " ",
-aliases: ["removeall", "rlr"],
-run: async (client, message, args) => {
+  name: "removeallrole",
+  description: " ",
+  aliases: ["removeall", "rlr"],
+  userPerm: ["ADMINISTRATOR"],
+  botPerm: ["MANAGE_ROLES"],
+  run: async (client, message, args) => {
   
   const { MessageEmbed } = require("discord.js")
-  
-      if (!message.guild.me.hasPermission("MANAGE_EMOJIS")) {
-      const embed = new MessageEmbed()
-          .setColor("#2f3136")
-          .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`MANAGE_EMOJIS\``)
-          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-          .setTimestamp()
-        message.channel.send(embed)
-      return;
-    }
-
-    if (!args[0]) {
-      const embed = new MessageEmbed()
-          .setColor("#2f3136")
-          .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê precisa definir o nome desse emoji`)
-          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-          .setTimestamp()
-        message.channel.send(embed)
-      return;
-    }
-
   
   const role = message.mentions.roles.first();
     

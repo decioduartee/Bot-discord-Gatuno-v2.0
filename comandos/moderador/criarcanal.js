@@ -2,31 +2,13 @@ module.exports = {
   name: "criarcanal",
   aliases: ["createchannel", "criar-canal", "create-channel"],
   category: "moderador",
+  userPerm: ["MANAGE_CHANNELS"],
+  botPerm: ["MANAGE_CHANNELS"],
   run: async (client, message, args) => {
     
     const { MessageEmbed } = require("discord.js");
     
     try {
-        if (!message.member.hasPermission("MANAGE_CHANNELS")){
-            const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO CRIAR O CANAL** \n\n • Você não tem a permisão \`MANAGE_CHANNELS\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-
-        if (!message.guild.me.hasPermission("MANAGE_CHANNELS")){
-            const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO CRIAR O CANAL** \n\n • Eu não tenho a permissão \`MANAGE_CHANNELS\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-      
       if (!args[0]) {
         const embed = new MessageEmbed()
             .setColor("#2f3136")

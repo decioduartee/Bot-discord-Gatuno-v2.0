@@ -9,27 +9,9 @@ module.exports = {
         description: "Altero o aplido do um membro",
         usage: "[mention | name | nickname | ID] <nickname>",
         accessableby: "everyone",
+        userPerm: ["MANAGE_MESSAGES"],
+        botPerm: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
-      
-      if (!message.member.hasPermission("MANAGE_MESSAGES")){
-        const embed = new MessageEmbed()
-        .setColor("#e74c3c")
-        .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê não tem a permissão \`MANAGE_MESSAGES\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-      return;
-      }
-  
-      if (!message.guild.me.hasPermission("MANAGE_MESSAGES")){
-        const embed = new MessageEmbed()
-        .setColor("#e74c3c")
-        .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`MANAGE_MESSAGES\``)
-        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-        .setTimestamp()
-      message.channel.send(embed)
-      return;
-      }
       
         if (!args[0]) return message.channel.send("**Por favor menciono um usuário!**")
       

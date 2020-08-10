@@ -1,34 +1,16 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-        name: "removerole",
-        category: "moderador",
-        aliases: ["rr"],
-        description: "Remove cargo de membros no discord",
-        accessableby: "Administrator",
-        usage: "[nome | nickname | mention | ID] <role>",
+    name: "removerole",
+    category: "moderador",
+    aliases: ["rr"],
+    description: "Remove cargo de membros no discord",
+    accessableby: "Administrator",
+    usage: "[nome | nickname | mention | ID] <role>",
+    userPerm: ["ADMINISTRATOR"],
+    botPerm: ["ADMINISTRATOR"],
     run: async (client, message, args) => {
 
-        if (!message.member.hasPermission("ADMINISTRATOR")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nVocê não tem a permissão \`ADIMINISTRADOR\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-
-        if (!message.guild.me.hasPermission("ADMINISTRATOR")){
-            const embed = new MessageEmbed()
-            .setColor("#e74c3c")
-            .setDescription(`<:error:715218174215323691> **| ERRO**\nEu não tenho a permissão \`ADIMINISTRADOR\``)
-            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            .setTimestamp()
-          message.channel.send(embed)
-        return;
-        }
-        
         if (!args[0]){
             const embed = new MessageEmbed()
             .setColor("#2f3136")
@@ -95,7 +77,7 @@ module.exports = {
         if (rMember.roles.cache.has(role.id)) await (rMember.roles.remove(role.id));
 
         const sembed = new MessageEmbed()
-            .setColor("#206694")
+            .setColor("#2f3136")
             .setAuthor(message.guild.name, message.guild.iconURL())
             .setDescription(`O Cargo ${role} foi removido de ${rMember.user}`)
         message.channel.send(sembed);

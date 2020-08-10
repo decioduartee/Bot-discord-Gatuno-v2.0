@@ -3,6 +3,8 @@ module.exports = {
   description: "Use esse comando para fazer votações no servidor",
   usage: "<prefix>poll enquete da votação",
   aliases: ["votação", "urna"],
+  userPerm: ["MANAGE_MESSAGES"],
+  botPerm: ["MANAGE_MESSAGES"],
   run: async (client, message, args) => {
     const { MessageEmbed } = require("discord.js")
     
@@ -11,7 +13,9 @@ module.exports = {
     if(!enquete) {
       const embed = new MessageEmbed()
         .setColor("#2f3136")
-        .setTitle("PARA INICIAR A VOTAÇÃO ME INFORME A ENQUETE")
+        .setDescription("<:errado:736447664329326613> **| ERRO AO FAZER A VOTAÇÂO**")
+        .addField("• **Informaçães:**", "• **Mensagem:** Me informe um enquente para a votação")
+        .setFooter(`Votação feita por ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
       return message.channel.send(embed)
     }
     
