@@ -1,20 +1,11 @@
 module.exports = {
 name: "addallrole",
-description: " ",
-aliases: ["alr", "allrole"],
+description: "Adicione um cargo em todos os membros do servidor",
+userPerm: ["ADMINISTRATOR"],
+aliases: ["addallr", "allrole"],
 run: async (client, message, args) => {
   
   const { MessageEmbed } = require("discord.js")
-  
-      if (!message.guild.me.hasPermission("MANAGE_EMOJIS")) {
-      const embed = new MessageEmbed()
-          .setColor("#2f3136")
-          .setDescription(`<:errado:736447664329326613> **| ERRO**\nEu não tenho a permissão \`MANAGE_EMOJIS\``)
-          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-          .setTimestamp()
-        message.channel.send(embed)
-      return;
-    }
   
   const role = message.mentions.roles.first();
     

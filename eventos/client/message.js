@@ -41,7 +41,15 @@ module.exports = async (client, message ) => {
       return message.channel.send(embed)
     };
     if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
-       return message.reply(`Você precisa das permissões \`${cmd.userPerm.join('`, `')}\` Para usar esse comando`);
+      const embed = new MessageEmbed()
+        .setColor("#2f3136")
+        .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
+        .addField(`• **Informações:**`, [
+          "• **Mensagem:** Você precisa de permissões para executar esse comando",
+          `• **Permissões:** \`${cmd.userPerm.join('`, `')}\``,
+        ])
+        .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
+      return message.channel.send(embed) 
     };
     
     cmd.run(client, message, args, database);
