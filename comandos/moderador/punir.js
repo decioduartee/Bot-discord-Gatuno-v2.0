@@ -167,10 +167,10 @@ module.exports = {
             }
             canal.send(embed)
 
-            const embed = new MessageEmbed()
+            const aviso = new MessageEmbed()
               .setColor("#2f3136")
               .setDescription("<:certo:736447597102760007> **| SUCESSO AO DAR WARN AO MEMBRO**")
-            message.channel.send(embed)
+            message.channel.send(aviso)
             
           })
           
