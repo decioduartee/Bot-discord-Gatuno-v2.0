@@ -74,15 +74,22 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor("#2f3136")
               .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-              .setDescription("<:certo:736447597102760007> **| SUCESSO AO KICKAR O MEMBRO**")
+              .setDescription("<:certo:736447597102760007> **| KICK APLICADO**")
               .addField("**Moderador responsavel:**", `• ${message.author}`)
               .addField("**Membro kickado:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
               .addField("**Motivo da punição:**", `• ${motivo || "Nenhum motivo definido."}`)
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
             
-            if(!canal) return message.channel.send(embed)
-            canal.send(embed)
+              if(!canal) {
+                return message.channel.send(embed)
+              }
+              canal.send(embed)
+  
+              const aviso = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription("<:certo:736447597102760007> **| SUCESSO AO KICKAR O MEMBRO**")
+              message.channel.send(aviso)
           })
           
           mute.on('collect', async r => {
@@ -140,14 +147,21 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor("#2f3136")
               .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-              .setDescription("<:certo:736447597102760007> **| SUCESSO AO MUTAR O MEMBRO**")
+              .setDescription("<:certo:736447597102760007> **| MUTE APLICADO**")
               .addField("**Moderador responsavel:**", `• ${message.author}`)
               .addField("**Membro mutado:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
               .addField("**Motivo da punição:**", `• ${motivo || "Nenhum motivo definido."}`)
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
-            if(!canal) return message.channel.send(embed)
-            canal.send(embed)
+              if(!canal) {
+                return message.channel.send(embed)
+              }
+              canal.send(embed)
+  
+              const aviso = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription("<:certo:736447597102760007> **| SUCESSO AO MUTAR O MEMBRO**")
+              message.channel.send(aviso)
             })
           })
           
@@ -180,7 +194,7 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor("#2f3136")
               .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-              .setDescription("<:certo:736447597102760007> **| SUCESSO AO BANIR O MEMBRO**")
+              .setDescription("<:certo:736447597102760007> **| BAN APLICADO**")
               .addField("**Moderador responsavel:**", `• ${message.author}`)
               .addField("**Membro Banido:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
@@ -188,8 +202,20 @@ module.exports = {
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
             if(!canal) return message.channel.send(embed).then(() =>
                 message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+
+                const aviso = new MessageEmbed()
+                  .setColor("#2f3136")
+                  .setDescription("<:certo:736447597102760007> **| SUCESSO AO BANIR O MEMBRO**")
+                message.channel.send(aviso)
+
             canal.send(embed).then(() =>
                 message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+
+                const aviso = new MessageEmbed()
+                  .setColor("#2f3136")
+                  .setDescription("<:certo:736447597102760007> **| SUCESSO AO BANIR O MEMBRO**")
+                message.channel.send(aviso)
+
             } catch {
                 message.guild.members.ban(membro, { reason: motivo })
             }
