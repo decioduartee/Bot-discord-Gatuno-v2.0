@@ -1,34 +1,79 @@
 module.exports = async (client, message ) => {
 
-    const { MessageEmbed } = require("discord.js")
-    const { prefix } = require("../../config.json");
+    //eventos com mensagem estão aqui
+    
     const firebase = require('firebase')
     const database = firebase.database()
+    const { MessageEmbed } = require("discord.js")
 
-    if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
+    //____________________________________________________________________________
 
-        const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setAuthor(`Olá ${message.author.username}`, client.user.displayAvatarURL())
-            .setDescription(`Vi que você me mencionou no chat, se você estiver com duvidas..\nSem problemas estou aqui para te ajudar, se estiver com duvidas\nSobre meus comando Por Favor use **${prefix}ajuda**, qualquer outra duvida\nSobre o Servidor Por Favor entre em contato com um moderador`)
-            .setFooter(`Fui mencionado por ${message.author.username}`,message.author.displayAvatarURL())
-            .setTimestamp();
-        message.channel.send(embed);
+    client.on("messageUpdate", async (oldMessage, newMessage) => {
+    if (oldMessage.content === newMessage.content) {
+      return;
     }
+  
+    let EditEmbed = new MessageEmbed()
+      .setAuthor(`Mensagem Editada`, newMessage.guild.iconURL({dynamic: true}))
+      .setColor("#2f3136")
+      .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
+      .setDescription(`Registro de mensagens editadas por ${oldMessage.author}. \n\n **• Informações** \n ▪︎ **Antes**: ${oldMessage.content} \n ▪︎ **Depois**: ${newMessage.content} \n ▪︎ **No canal**: ${newMessage.channel} \n ▪︎ **Servidor**: ${newMessage.guild.name}`);
+  
+    let canais = await database.ref(`Servidores/${newMessage.guild.id}/Canais/CanalLog`).once('value')
+    canais = canais.val()
+  
+    const canal = newMessage.guild.channels.cache.get(canais)
+    if (!canal) return;
+    canal.send(EditEmbed);
+  })
 
-    if (message.author.bot || message.system) return null;
-    if (!message.content.startsWith(prefix)) return null;
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const comando = args.shift().toLowerCase();
-    const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-    if (!cmd) return null;
+  //____________________________________________________________________________
 
-    /* if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
-        return message.reply(`eu preciso das permissões \`${cmd.botPerm.join('`, `')}\` Para funcionar corretamente`);
-    };
-    if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
-        return message.reply(`Você precisa das permissões \`${cmd.userPerm.join('`, `')}\` Para usar esse comando`);
-    }; */
+  client.on("messageDelete", async (message, channel) => {
 
-    cmd.run(client, message, args, database);
+    let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalLog`).once(`value`)
+    canais = canais.val()
+  
+    let DeleteEmbed = new MessageEmbed()
+      .setAuthor(`Mensagem Deletada`, message.guild.iconURL({dynamic: true}))
+      .setColor("#2f3136")
+      .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+      .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
+  
+    const canal = message.guild.channels.cache.get(canais);
+      if (!canal) return;
+    canal.send(DeleteEmbed);
+  })
+
+  //____________________________________________________________________________
+
+  client.on("guildMemberUpdate", async (oldMember, newMember) => {
+  
+    let canais = await database.ref(`Servidores/${newMember.guild.id}/Canais/CanalLog`).once(`value`)
+    canais = canais.val()
+  
+    const canal = newMember.guild.channels.cache.get(canais);
+    if (!canal) return;
+  
+    let membros = [oldMember.nickname, newMember.nickname];
+  
+    if (membros[0] == null) 
+    {
+      membros[0] = oldMember.user.username;
+    }
+    if (membros[1] == null) 
+    {
+      membros[1] = newMember.user.username;
+    }
+  
+    if (oldMember.nickname != newMember.nickname) 
+    {
+      let ApelidoEmbed = new Discord.MessageEmbed()
+        .setAuthor(`Apelido alterado`, newMember.guild.iconURL({ dynamic: true }))
+        .setColor("#2f3136")
+        .setThumbnail(newMember.user.displayAvatarURL({ dynamic: true }))
+        .setDescription(`Registro de apelidos alterados por ${newMember}. \n\n **• Informações** \n ▪︎ **Antes**: ${membros[0]} \n ▪︎ **Depois**: ${membros[1]} \n ▪︎ **Servidor**: ${newMember.guild.name}`);
+      canal.send(ApelidoEmbed);
+    }
+  })
 }
