@@ -156,14 +156,22 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor("#2f3136")
               .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-              .setDescription("<:certo:736447597102760007> **| SUCESSO DAR WARN AO MEMBRO**")
+              .setDescription("<:certo:736447597102760007> **| WARN APLICADO**")
               .addField("**Moderador responsavel:**", `• ${message.author}`)
               .addField("**Membro que recebeu warn:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
               .addField("**Motivo da punição:**", `• ${motivo || "Nenhum motivo definido."}`)
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
-            if(!canal) return message.channel.send(embed)
+            if(!canal) {
+              return message.channel.send(embed)
+            }
             canal.send(embed)
+
+            const embed = new MessageEmbed()
+              .setColor("#2f3136")
+              .setDescription("<:certo:736447597102760007> **| SUCESSO AO DAR WARN AO MEMBRO**")
+            message.channel.send(embed)
+            
           })
           
           ban.on('collect', r => {
