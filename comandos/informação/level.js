@@ -71,7 +71,8 @@ module.exports = {
               fundo.print(fonte, 244, 57, `Cats ${cats.toLocaleString()}`);
               fundo.print(fonte2, 432, 119,`falta ${falta} XP / Proximo level`);
               fundo.print(fonte3, 255, 99, `${usuarios.user.tag}`);
-              fundo.composite(avatar, 38, 23).write("level.png");
+              fundo.composite(avatar, 38, 23);
+              fundo.write('level.png')
               message.channel.send(``, { files: ["level.png"] });
             });
           }
