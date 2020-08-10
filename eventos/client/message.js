@@ -32,13 +32,13 @@ module.exports = async (client, message ) => {
     if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
       const embed = new MessageEmbed()
         .setColor("#2f3136")
-        .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO`)
+        .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
         .addField(`• **Informações:**`, [
           "• **Mensagem:** Eu preciso de permissões para funcionar corretarmente",
           `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
         ])
         .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-      message.channel.send(embed)
+      return message.channel.send(embed)
     };
     if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
        return message.reply(`Você precisa das permissões \`${cmd.userPerm.join('`, `')}\` Para usar esse comando`);
