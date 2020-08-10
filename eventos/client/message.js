@@ -35,9 +35,6 @@ module.exports = async (client, message ) => {
     if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
        return message.reply(`Você precisa das permissões \`${cmd.userPerm.join('`, `')}\` Para usar esse comando`);
     };
-    if (!cmd.enabled) {
-        return message.channel.send('This command is disabled');
-    };
     
     cmd.run(client, message, args, database);
 
