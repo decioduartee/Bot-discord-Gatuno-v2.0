@@ -38,6 +38,7 @@ module.exports = async (client, message ) => {
           `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
         ])
         .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
+      message.channel.send(embed)
     };
     if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
        return message.reply(`Você precisa das permissões \`${cmd.userPerm.join('`, `')}\` Para usar esse comando`);
