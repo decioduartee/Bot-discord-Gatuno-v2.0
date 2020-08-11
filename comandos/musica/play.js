@@ -8,7 +8,7 @@ const { play } = require("../system/music.js");
 
 module.exports = {
     name: "play",
-    botPerm: ['CONNECT', 'SPEAK', 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ADD_REACTIONS'],
+    botPerm: ['CONNECT', 'SPEAK', 'ADD_REACTIONS'],
     aliases: ["p"],
     description: "Use play <nome/url da musica> para tocar uma musica",
     run: async (client, message, args) => {
