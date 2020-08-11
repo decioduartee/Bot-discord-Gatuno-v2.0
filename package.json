@@ -31,7 +31,8 @@
     "canvas": "^2.6.1",
     "node-superfetch": "^0.1.10",
     "superagent": "^5.2.2",
-    "string-progressbar": "^1.0.1"
+    "string-progressbar": "^1.0.1",
+    "mal-scraper": "^2.6.8"
   },
   "devDependencies": {},
   "engines": {
