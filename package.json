@@ -25,13 +25,13 @@
     "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^3.1.2",
     "ytdl-core-discord": "^1.2.0",
-    "string-progressbar": "^1.0.1",
     "parse-ms": "^2.0.0",
     "@vitalets/google-translate-api": "^3.0.0",
     "better-youtube-api": "^2.1.7",
     "canvas": "^2.6.1",
     "node-superfetch": "^0.1.10",
-    "superagent": "^5.2.2"
+    "superagent": "^5.2.2",
+    "string-progressbar": "^1.0.1"
   },
   "devDependencies": {},
   "engines": {
