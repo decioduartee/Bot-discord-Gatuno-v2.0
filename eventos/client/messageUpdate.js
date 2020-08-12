@@ -1,4 +1,4 @@
-module.exports = (oldMessage, newMessage) => {
+module.exports = async (oldMessage, newMessage) => {
     if (oldMessage.content === newMessage.content) {
       return;
     }
