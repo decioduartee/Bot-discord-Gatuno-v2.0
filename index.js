@@ -152,7 +152,7 @@ client.on("message", async message => {
     
       const canal = message.guild.channels.cache.get(canais);
         if (!canal) return;
-      canal.send(DeleteEmbed);
+      return canal.send(DeleteEmbed);
     })
 
     //____________________________________________________________________________
