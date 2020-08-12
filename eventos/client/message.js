@@ -1,4 +1,4 @@
-module.exports = (client, message ) => {
+module.exports = async (client, message ) => {
 
     //eventos com mensagem estão aqui
     
