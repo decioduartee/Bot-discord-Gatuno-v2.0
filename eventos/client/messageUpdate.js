@@ -1,4 +1,7 @@
 module.exports = async (oldMessage, newMessage) => {
+
+    const { MessageEmbed } = require("discord.js")
+    
     if (oldMessage.content === newMessage.content) {
       return;
     }
