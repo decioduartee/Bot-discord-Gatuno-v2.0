@@ -1,4 +1,4 @@
-module.exports = async (client, message ) => {
+module.exports = (client, message ) => {
 
     //eventos com mensagem estão aqui
     
@@ -19,16 +19,14 @@ module.exports = async (client, message ) => {
       message.channel.send(embed);
     }
     
+    if (message.channel.type === "dm") return null;
     if (message.author.bot || message.system) return null;
     if (!message.content.startsWith(prefix)) return null;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const comando = args.shift().toLowerCase();
     const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
     if (!cmd) return null;
-    
-    if (!message.guild && cmd.guildOnly) {
-      return message.channel.send(`This command is only available in a guild`);
-    };
+
     if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
       const embed = new MessageEmbed()
         .setColor("#2f3136")
@@ -53,27 +51,6 @@ module.exports = async (client, message ) => {
     };
     
     cmd.run(client, message, args, database);
-
-    //____________________________________________________________________________
-
-    client.on("messageUpdate", async (oldMessage, newMessage) => {
-    if (oldMessage.content === newMessage.content) {
-      return;
-    }
-  
-    let EditEmbed = new MessageEmbed()
-      .setAuthor(`Mensagem Editada`, newMessage.guild.iconURL({dynamic: true}))
-      .setColor("#2f3136")
-      .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
-      .setDescription(`Registro de mensagens editadas por ${oldMessage.author}. \n\n **• Informações** \n ▪︎ **Antes**: ${oldMessage.content} \n ▪︎ **Depois**: ${newMessage.content} \n ▪︎ **No canal**: ${newMessage.channel} \n ▪︎ **Servidor**: ${newMessage.guild.name}`);
-  
-    let canais = await database.ref(`Servidores/${newMessage.guild.id}/Canais/CanalLog`).once('value')
-    canais = canais.val()
-  
-    const canal = newMessage.guild.channels.cache.get(canais)
-    if (!canal) return;
-    canal.send(EditEmbed);
-  })
 
   //____________________________________________________________________________
 
