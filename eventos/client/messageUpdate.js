@@ -1,7 +1,9 @@
 module.exports = async (oldMessage, newMessage) => {
 
     const { MessageEmbed } = require("discord.js")
-    
+    const firebase = require('firebase')
+    const database = firebase.database()
+
     if (oldMessage.content === newMessage.content) {
       return;
     }
