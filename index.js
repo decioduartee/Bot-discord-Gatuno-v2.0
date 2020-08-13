@@ -24,7 +24,6 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const database = firebase.database();
 
 client.comandos = new Discord.Collection();
@@ -45,47 +44,6 @@ client.on("message", async message => {
   const comando = args.shift().toLowerCase();
   const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
   if (!cmd) return null;
-
- //__________________________________Modo afk____________________________
-
-  const afk = new db.table("AFKs"),
-    mentioned = await message.mentions.members.first();
-  if (mentioned) {
-    let status = await afk.get(mentioned.id);
-
-    if (status) {
-      const embed = new Discord.MessageEmbed()
-        .setColor("#2f3136")
-        .setDescription(`<:certo:736447597102760007> **| MODO AFK ATIVADO** \n\n ${mentioned.user} Está em modo **AFK**\n\n**Lembrete**:\n\`\`\`fix\n${status}\`\`\``)
-        .setThumbnail(mentioned.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-        .setTimestamp()
-        .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
-      message.channel.send(embed).then(i => i.delete({ timeout: 50000 }));
-    }
-  }
-  
-//_____________________________comando de anti invites___________________
-
-    let blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
-    
-    blockinvite = blockinvite.val()
-
-    if(blockinvite === "on") {
-
-    let Link = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
-  
-    if (Link.some(word => message.content.toLowerCase().includes(word))) {
-      await message.delete();
-
-    let embed = new Discord.MessageEmbed()
-      .setColor("#2f3136")
-      .setDescription("**Por favor respeite as regas**! não mande convites neste servidor")
-    return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
-     }
-    }
-  
-  //______________________________________________________________________
-  
 
   let xp = "";
   let cats = "";
@@ -151,7 +109,45 @@ client.on("message", async message => {
     }
   });
 
-  //______________________________________________________________________________________________
+ //__________________________________Modo afk____________________________
+
+  const afk = new db.table("AFKs"),
+    mentioned = await message.mentions.members.first();
+  if (mentioned) {
+    let status = await afk.get(mentioned.id);
+
+    if (status) {
+      const embed = new Discord.MessageEmbed()
+        .setColor("#2f3136")
+        .setDescription(`<:certo:736447597102760007> **| MODO AFK ATIVADO** \n\n ${mentioned.user} Está em modo **AFK**\n\n**Lembrete**:\n\`\`\`fix\n${status}\`\`\``)
+        .setThumbnail(mentioned.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+        .setTimestamp()
+        .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
+      message.channel.send(embed).then(i => i.delete({ timeout: 50000 }));
+    }
+  }
+  
+//_____________________________comando de anti invites___________________
+
+    let blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
+    
+    blockinvite = blockinvite.val()
+
+    if(blockinvite === "on") {
+
+    let Link = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
+  
+    if (Link.some(word => message.content.toLowerCase().includes(word))) {
+      await message.delete();
+
+    let embed = new Discord.MessageEmbed()
+      .setColor("#2f3136")
+      .setDescription("**Por favor respeite as regas**! não mande convites neste servidor")
+    return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
+     }
+    }
+  
+  //______________________________________________________________________
   
 
     client.on("messageUpdate", async (oldMessage, newMessage) => {
