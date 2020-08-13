@@ -16,7 +16,7 @@ module.exports = {
                 .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                 .setTimestamp()
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
-                status.set(message.author.id, args.join(" ") || `modo AFK`);
+                status.set(message.author.id, args.join(" ") || `Esto em modo AFK`);
             message.channel.send(embed)
         } else {
             const embed = new MessageEmbed()
