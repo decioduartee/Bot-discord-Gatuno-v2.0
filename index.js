@@ -34,49 +34,11 @@ client.eventos = new Map();
   require(`./handlers/${handler}`)(client);
 });
 
-
-
-
-
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-  let newUserChannel = newMember.voiceChannel
-  let oldUserChannel = oldMember.voiceChannel
-  const serverQueue = oldMember.client.queue.get(oldMember.guild.id);
-
-
-  if(oldUserChannel === undefined && newUserChannel !== undefined) {
-      // User joines a voice channel
-  } else if(newUserChannel === undefined){
-
-    // User leaves a voice channel
-      if(oldMember.id === '705189249544224849'){
-          return console.log("BOT");
-      } else {
-          if(client.guilds.cache.get(oldMember.guild.id).voiceConnection != null){
-              if(client.guilds.cache.get(oldMember.guild.id).voiceConnection.channel.id === oldUserChannel.id){
-                    if(oldUserChannel.members.cache.size < 2){
-                        serverQueue.songs = [];
-                        serverQueue.connection.dispatcher.end()
-                      
-                    }    
-          }else{
-            return console.log();
-          }
-        }else{
-          return undefined;
-      }
-    }
-  }
-})
-
-
-
-
-
-
-
 client.on("message", async message => {
-  if (message.author.bot) return;
+
+  if (message.channel.type === "dm") return null;
+  if (message.author.bot || message.system) return null;
+  if (!message.content.startsWith(prefix)) return null;
 
  //__________________________________Modo afk____________________________
 
