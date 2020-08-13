@@ -3,6 +3,7 @@ const firebase = require("firebase");
 const db = require(`quick.db`);
 const { MessageEmbed } = require("discord.js")
 const { prefix } = require("./config.json")
+const jimp = require("jimp");
 //const Constants = require("discord.js/src/util/Constants.js");
 //Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
@@ -120,12 +121,7 @@ client.on("message", async message => {
     }
   
   //______________________________________________________________________
-
-  const firebase = require('firebase')
-  const database = firebase.database()
-  const { prefix } = require("../../config.json");
-  const { MessageEmbed } = require("discord.js")
-  const jimp = require("jimp");
+  
 
   let xp = "";
   let cats = "";
