@@ -38,7 +38,6 @@ client.on("message", async message => {
 
   if (message.channel.type === "dm") return null;
   if (message.author.bot || message.system) return null;
-  if (!message.content.startsWith(prefix)) return null;
 
  //__________________________________Modo afk____________________________
 
