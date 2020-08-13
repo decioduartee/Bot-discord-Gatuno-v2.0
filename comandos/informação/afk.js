@@ -12,7 +12,7 @@ module.exports = {
         if (!afk) {
             const embed = new MessageEmbed()
                 .setColor('#2f3136')
-                .setDescription(`<:certo:736447597102760007> **| MODO AFK ATIVADO** \n\n ${message.author}, Agora você está em modo AFK. \n\n **Lembrete:** \n \`\`\`fix\n${args.join(" ") ? args.join(" ") : 'modo AFK'}\`\`\``)
+                .setDescription(`<:certo:736447597102760007> **| MODO AFK ATIVADO** \n\n ${message.author}, Agora você está em modo AFK. \n\n **Lembrete:** \n \`\`\`fix\n${args.join(" ") ? args.join(" ") : 'Estou em modo AFK'}\`\`\``)
                 .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                 .setTimestamp()
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
