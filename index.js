@@ -57,31 +57,6 @@ client.on("message", async message => {
   const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
   if (!cmd) return null;
 
-  if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
-    const embed = new MessageEmbed()
-      .setColor("#2f3136")
-      .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-      .addField(`• **Informações:**`, [
-        "• **Mensagem:** Eu preciso de permissões para funcionar corretarmente",
-        `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
-      ])
-      .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-    return message.channel.send(embed)
-  };
-  if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
-    const embed = new MessageEmbed()
-      .setColor("#2f3136")
-      .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-      .addField(`• **Informações:**`, [
-        "• **Mensagem:** Você precisa de permissões para executar esse comando",
-        `• **Permissões:** \`${cmd.userPerm.join('`, `')}\``,
-      ])
-      .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-    return message.channel.send(embed) 
-  };
-  
-  cmd.run(client, message, args, database);
-
  //__________________________________Modo afk____________________________
 
   const afk = new db.table("AFKs"),
@@ -258,6 +233,31 @@ client.on("message", async message => {
       canal.send(ApelidoEmbed);
       }
     })
+
+    if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
+      const embed = new MessageEmbed()
+        .setColor("#2f3136")
+        .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
+        .addField(`• **Informações:**`, [
+          "• **Mensagem:** Eu preciso de permissões para funcionar corretarmente",
+          `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
+        ])
+        .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
+      return message.channel.send(embed)
+    };
+    if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
+      const embed = new MessageEmbed()
+        .setColor("#2f3136")
+        .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
+        .addField(`• **Informações:**`, [
+          "• **Mensagem:** Você precisa de permissões para executar esse comando",
+          `• **Permissões:** \`${cmd.userPerm.join('`, `')}\``,
+        ])
+        .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
+      return message.channel.send(embed) 
+    };
+    
+    cmd.run(client, message, args, database);
 
 });
 
