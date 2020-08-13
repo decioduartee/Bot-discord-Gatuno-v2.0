@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const firebase = require("firebase");
 const db = require(`quick.db`);
 const { MessageEmbed } = require("discord.js")
+const { prefix } = require("./config.json")
 //const Constants = require("discord.js/src/util/Constants.js");
 //Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
