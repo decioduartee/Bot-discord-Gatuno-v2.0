@@ -41,7 +41,7 @@ module.exports = async (client, message ) => {
         .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
       return message.channel.send(embed) 
     };
-    
-    cmd.run(client, message, args, database);
+
+  cmd.run(client, message, args, database);
 
 }
