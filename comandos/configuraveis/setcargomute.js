@@ -27,7 +27,7 @@ module.exports = {
          return;
         }
   
-        database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/Mute`).set(mention.id)
+        database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`).set(mention.id)
         
         const embed = new MessageEmbed()
             .setDescription(`<:certo:736447597102760007> **| SUCESSO AO SETAR O CARGO** \n\n • **Informações:** \n • Cargo de Mute definido para: ${mention}`)

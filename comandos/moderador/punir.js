@@ -41,7 +41,7 @@ module.exports = {
             .addField(`**Exemplo:**`, `• ${prefix}punir \`@papito\` banido por ser muito lindo`)
             .setFooter(`${message.client.user.username}: Lembrando que aliases desse comando é "${prefix}puni"`, message.client.user.displayAvatarURL());
           message.channel.send(embed)
-        }
+      }
         
       const embed = new MessageEmbed()
             .setColor("#2f3136")

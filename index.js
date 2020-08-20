@@ -1,9 +1,11 @@
 const Discord = require("discord.js");
 const firebase = require("firebase");
 const db = require(`quick.db`);
-const { MessageEmbed } = require("discord.js")
-/* const { prefix } = require("./config.json") */
 const jimp = require("jimp");
+
+/* const { MessageEmbed } = require("discord.js")
+const { prefix } = require("./config.json") */
+
 //const Constants = require("discord.js/src/util/Constants.js");
 //Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
@@ -140,7 +142,9 @@ client.on("message", async message => {
   //______________________________________________________________________
   
 
-    /* client.on("messageUpdate", async (oldMessage, newMessage) => {
+    /* Tirei os eventos por que esta flodando sem parar ( tenho que resolver ainda )
+    
+    client.on("messageUpdate", async (oldMessage, newMessage) => {
       if (oldMessage.content === newMessage.content) {
         return;
       }
@@ -175,7 +179,7 @@ client.on("message", async message => {
       const canal = message.guild.channels.cache.get(canais);
         if (!canal) return;
       return canal.send(DeleteEmbed);
-    }) */
+    })
 
     //____________________________________________________________________________
 
@@ -207,7 +211,7 @@ client.on("message", async message => {
         .setDescription(`Registro de apelidos alterados por ${newMember}. \n\n **• Informações** \n ▪︎ **Antes**: ${membros[0]} \n ▪︎ **Depois**: ${membros[1]} \n ▪︎ **Servidor**: ${newMember.guild.name}`);
       canal.send(ApelidoEmbed);
       }
-    })
+    }) */
 
 });
 
