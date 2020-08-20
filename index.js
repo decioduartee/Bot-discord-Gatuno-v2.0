@@ -146,14 +146,6 @@ client.on("message", async message => {
 
   //______________________________________________________________________
 
-    if (!message.content.startsWith(prefix)) return null;
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const comando = args.shift().toLowerCase();
-    const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-    if (!cmd) return null;
-  
-    cmd.run(client, message, args, database);
-  
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
       
       const embed = new MessageEmbed()
@@ -164,6 +156,14 @@ client.on("message", async message => {
         .setTimestamp();
       message.channel.send(embed);
     }
+
+    if (!message.content.startsWith(prefix)) return null;
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const comando = args.shift().toLowerCase();
+    const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
+    if (!cmd) return null;
+  
+    cmd.run(client, message, args, database);
   
     if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
       const embed = new MessageEmbed()
