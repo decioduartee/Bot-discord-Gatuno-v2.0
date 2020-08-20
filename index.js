@@ -39,8 +39,7 @@ client.on("message", async message => {
 
  //__________________________________Modo afk____________________________
 
-  const afk = new db.table("AFKs"),
-    mentioned = await message.mentions.members.first();
+  const afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
   if (mentioned) {
     let status = await afk.get(mentioned.id);
 
@@ -58,20 +57,17 @@ client.on("message", async message => {
 //_____________________________comando de anti invites___________________
 
     let blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
-    
     blockinvite = blockinvite.val()
 
     if(blockinvite === "on") {
+      let Link = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
 
-    let Link = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
-  
       if (Link.some(word => message.content.toLowerCase().includes(word))) {
-      await message.delete();
-
-    let embed = new Discord.MessageEmbed()
-      .setColor("#2f3136")
-      .setDescription("**Por favor respeite as regas**! não mande convites neste servidor")
-    return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
+        await message.delete();
+        let embed = new Discord.MessageEmbed()
+          .setColor("#2f3136")
+          .setDescription("**Por favor respeite as regas**! não mande convites neste servidor")
+        return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
       }
     }
 
@@ -144,7 +140,7 @@ client.on("message", async message => {
   //______________________________________________________________________
   
 
-    client.on("messageUpdate", async (oldMessage, newMessage) => {
+    /* client.on("messageUpdate", async (oldMessage, newMessage) => {
       if (oldMessage.content === newMessage.content) {
         return;
       }
@@ -159,9 +155,9 @@ client.on("message", async message => {
       canais = canais.val()
     
       const canal = newMessage.guild.channels.cache.get(canais)
-      /* if (!canal) return; */
+      if (!canal) return;
       canal.send(EditEmbed);
-  })
+    })
   
     //______________________________________________________________________
 
@@ -177,9 +173,9 @@ client.on("message", async message => {
         .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
     
       const canal = message.guild.channels.cache.get(canais);
-        /* if (!canal) return; */
+        if (!canal) return;
       return canal.send(DeleteEmbed);
-    })
+    }) */
 
     //____________________________________________________________________________
 
@@ -189,7 +185,7 @@ client.on("message", async message => {
         canais = canais.val()
   
       const canal = newMember.guild.channels.cache.get(canais);
-        /* if (!canal) return; */
+        if (!canal) return;
   
       let membros = [oldMember.nickname, newMember.nickname];
   
