@@ -1,5 +1,7 @@
 module.exports = (client, message) => {
 
+    const { prefix } = require("../../config.json")
+
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
       
         const embed = new MessageEmbed()
