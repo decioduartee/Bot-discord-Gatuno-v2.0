@@ -1,7 +1,7 @@
 module.exports = (client, message) => {
 
     if (message.channel.type === "dm") return;
-  if (message.author.bot || message.system) return;
+    if (message.author.bot || message.system) return;
 
     const { MessageEmbed } = require("discord.js");
     const firebase = require('firebase')

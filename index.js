@@ -159,7 +159,7 @@ client.on("message", async message => {
       canais = canais.val()
     
       const canal = newMessage.guild.channels.cache.get(canais)
-      if (!canal) return;
+      /* if (!canal) return; */
       canal.send(EditEmbed);
   })
   
@@ -177,7 +177,7 @@ client.on("message", async message => {
         .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
     
       const canal = message.guild.channels.cache.get(canais);
-        if (!canal) return;
+        /* if (!canal) return; */
       return canal.send(DeleteEmbed);
     })
 
@@ -189,7 +189,7 @@ client.on("message", async message => {
         canais = canais.val()
   
       const canal = newMember.guild.channels.cache.get(canais);
-        if (!canal) return;
+        /* if (!canal) return; */
   
       let membros = [oldMember.nickname, newMember.nickname];
   
