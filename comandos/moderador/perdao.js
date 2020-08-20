@@ -14,8 +14,6 @@ module.exports = {
         /* let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalPunição`).once('value')
           canais = canais.val()
         let canal = message.guild.channels.cache.get(canais) */
-
-        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
         
         if(!args[0]) {
           const embed = new MessageEmbed()
@@ -28,12 +26,14 @@ module.exports = {
           message.channel.send(embed)
         }
 
+        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+
         const embed = new MessageEmbed()
             .setColor("#2f3136")
             .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-            .setAuthor(`COMO DESEJA PERDOAR ESTE MEMBRO?`, client.user.displayAvatarURL())
+            .setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
-            .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdoes:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
+            .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdões:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
             .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
         message.channel.send(embed).then(async (msg) => {
             msg.react("736703246969733120")
