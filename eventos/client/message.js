@@ -1,5 +1,8 @@
 module.exports = (client, message) => {
 
+    const { MessageEmbed } = require("discord.js");
+    const firebase = require('firebase')
+    const database = firebase.database()
     const { prefix } = require("../../config.json")
 
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
