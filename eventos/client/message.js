@@ -1,5 +1,8 @@
 module.exports = (client, message) => {
 
+    if (message.channel.type === "dm") return;
+  if (message.author.bot || message.system) return;
+
     const { MessageEmbed } = require("discord.js");
     const firebase = require('firebase')
     const database = firebase.database()
@@ -16,11 +19,11 @@ module.exports = (client, message) => {
         message.channel.send(embed);
       }
 
-    if (!message.content.startsWith(prefix)) return null;
+    if (!message.content.startsWith(prefix)) return;
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const comando = args.shift().toLowerCase();
         const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-        if (!cmd) return null;
+        if (!cmd) return;
       
         cmd.run(client, message, args, database);
       
