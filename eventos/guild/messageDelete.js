@@ -8,7 +8,7 @@ module.exports = async (message, channel) => {
     canais = canais.val() */
   
     let DeleteEmbed = new MessageEmbed()
-      .setAuthor(`Mensagem Deletada`, message.guild.iconURL({dynamic: true}))
+      /* .setAuthor(`Mensagem Deletada`, message.guild.iconURL({dynamic: true})) */
       .setColor("#2f3136")
       .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
       .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
