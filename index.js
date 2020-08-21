@@ -1,6 +1,11 @@
-const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] }, new Discord.Client({ disableEveryone: true }));
 const Discord = require("discord.js");
 const firebase = require("firebase");
+
+const client = new Discord.Client({ 
+  partials: ["MESSAGE", "CHANNEL", "REACTION"] }, 
+  new Discord.Client({ disableEveryone: true 
+  })
+);
 
 /*
 const Constants = require("discord.js/src/util/Constants.js");
