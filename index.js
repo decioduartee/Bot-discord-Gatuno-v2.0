@@ -150,37 +150,34 @@ client.on("message", async message => {
         message.channel.send(embed);
       }
 
-    if (!message.content.startsWith(prefix)) return null;
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
-        const comando = args.shift().toLowerCase();
-        const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-        if (!cmd) return null;
-      
-    if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
-         const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-            .addField(`• **Informações:**`, [
-              "• **Mensagem:** Eu preciso de permissões para funcionar corretarmente",
-              `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
-            ])
-            .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-        return message.channel.send(embed)
-    };
+      if (!message.content.startsWith(prefix)) return;
 
-    if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
-        const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-            .addField(`• **Informações:**`, [
-            "• **Mensagem:** Você precisa de permissões para executar esse comando",
-            `• **Permissões:** \`${cmd.userPerm.join('`, `')}\``,
-            ])
-            .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-        return message.channel.send(embed) 
-    };
-
-    cmd.run(client, message, args, database);
+      if (!message.member)
+        message.member = await message.guild.fetchMember(message);
+    
+      const args = message.content.slice(prefix.length).trim().split(/ +/g);
+      const cmd = args.shift().toLowerCase();
+    
+      if (cmd.length === 0) return;
+    
+      let comando = client.comandos.get(cmd);
+      if (!comando) comando = client.comandos.get(client.aliases.get(cmd));
+    
+      if (comando) {
+        comando.run(client, message, args, database);
+      } else {
+        message.react("🔍");
+        message.delete({ timeout: 40000 });
+    
+        message
+          .reply({
+            embed: {
+              color: "#2f3136",
+              description: `<:listadecomandos:706682302989860876> Chequei meus comandos e não encontrei \`${prefix}${cmd}\` Por Favor use \`${prefix}ajuda\`` //+ err.message
+            }
+          })
+          .then(message => message.delete({ timeout: 40000 }));
+      }
   
   //______________________________________________________________________
   
@@ -206,7 +203,21 @@ client.on("message", async message => {
   
     //______________________________________________________________________
 
+    client.on("messageDelete", async (message, channel) => {
+
+      let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalLog`).once(`value`)
+      canais = canais.val()
     
+      let DeleteEmbed = new MessageEmbed()
+        .setAuthor(`Mensagem Deletada`, message.guild.iconURL({dynamic: true}))
+        .setColor("#2f3136")
+        .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+        .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
+    
+      const canal = message.guild.channels.cache.get(canais);
+        if (!canal) return;
+      return canal.send(DeleteEmbed);
+    })
 
     //____________________________________________________________________________
 
