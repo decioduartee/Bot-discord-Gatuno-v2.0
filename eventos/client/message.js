@@ -1,7 +1,7 @@
 module.exports = async (client, message) => {
 
     const db = require(`quick.db`);
-    const { Discord, MessageEmbed } = require("discord.js")
+    const { MessageEmbed } = require("discord.js")
     const { prefix } = require("../../config.json")
     const jimp = require("jimp");
     const firebase = require('firebase')

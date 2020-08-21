@@ -1,17 +1,13 @@
+const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] }, new Discord.Client({ disableEveryone: true }));
 const Discord = require("discord.js");
 const firebase = require("firebase");
-const db = require(`quick.db`);
-const { MessageEmbed } = require("discord.js")
-const { prefix } = require("./config.json")
-const jimp = require("jimp");
 
-//const Constants = require("discord.js/src/util/Constants.js");
-//Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
+/*
+const Constants = require("discord.js/src/util/Constants.js");
+Constants.DefaultOptions.ws.properties.$browser = `Discord iOS`;
 
-const client = new Discord.Client(
-  { partials: ["MESSAGE", "CHANNEL", "REACTION"] },
-  new Discord.Client({ disableEveryone: true })
-);
+deixa o bot em modo celular como status
+*/
 
 var firebaseConfig = {
   apiKey: "AIzaSyCvameiSh9UygMOBgckn9jpVDYnyLbRcz0",
@@ -32,16 +28,15 @@ client.aliases = new Discord.Collection();
 client.queue = new Map();
 client.eventos = new Map();
 
-["comando", "eventos"].forEach(handler => {
-  require(`./handlers/${handler}`)(client);
-});
+["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
+/*
 client.on("message", async message => {
   
   //______________________________________________________________________
   
     
-    /* client.on("messageUpdate", async (oldMessage, newMessage) => {
+    client.on("messageUpdate", async (oldMessage, newMessage) => {
       if (oldMessage.content === newMessage.content) {
         return;
       }
@@ -108,8 +103,9 @@ client.on("message", async message => {
         .setDescription(`Registro de apelidos alterados por ${newMember}. \n\n **• Informações** \n ▪︎ **Antes**: ${membros[0]} \n ▪︎ **Depois**: ${membros[1]} \n ▪︎ **Servidor**: ${newMember.guild.name}`);
       canal.send(ApelidoEmbed);
       }
-    }) */
+    })
 
 });
+*/
 
 client.login(process.env.token);
