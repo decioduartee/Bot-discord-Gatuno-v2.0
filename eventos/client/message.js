@@ -3,7 +3,7 @@ module.exports = (message) => {
     const database = firebase.database()
     const jimp = require("jimp");
 
-    if (message.author.bot || message.system) return;
+    if (message.author.bot && message.guild) return;
     
     let xp = "";
     let cats = "";
