@@ -11,7 +11,7 @@ module.exports = (client) => {
           };
         };
 
-        ["client", "guild"].forEach(x => load(x))
+        ["client", "guild", "logs"].forEach(x => load(x))
 
         console.log(`[COMANDOS] Caregado`)
 };
