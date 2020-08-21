@@ -160,8 +160,6 @@ client.on("message", async message => {
         const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
         if (!cmd) return null;
       
-        cmd.run(client, message, args, database);
-      
     if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
          const embed = new MessageEmbed()
             .setColor("#2f3136")
@@ -185,6 +183,8 @@ client.on("message", async message => {
             .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
         return message.channel.send(embed) 
     };
+
+    cmd.run(client, message, args, database);
   
   //______________________________________________________________________
   
