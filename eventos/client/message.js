@@ -3,7 +3,6 @@ module.exports = (message) => {
     const database = firebase.database()
     const jimp = require("jimp");
 
-    if (message.channel.type === "dm") return;
     if (message.author.bot || message.system) return;
     
     let xp = "";
