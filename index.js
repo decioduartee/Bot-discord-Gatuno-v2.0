@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
 const firebase = require("firebase");
 const db = require(`quick.db`);
-const { MessageEmbed } = require("discord.js")
-const { prefix } = require("./config.json")
+
 const jimp = require("jimp");
 
 //const Constants = require("discord.js/src/util/Constants.js");

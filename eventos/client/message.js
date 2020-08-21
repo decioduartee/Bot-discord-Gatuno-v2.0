@@ -2,6 +2,11 @@ module.exports = message => {
     if (message.author.bot && message.guild || message.system) return null;
     if (message.channel.type === "dm") return null;
 
+    const { MessageEmbed } = require("discord.js")
+    const { prefix } = require("../../config.json")
+    const firebase = require('firebase')
+    const database = firebase.database()
+
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
       
         const embed = new MessageEmbed()
