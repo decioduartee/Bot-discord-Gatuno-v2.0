@@ -73,8 +73,8 @@ client.on("message", async message => {
 
 //______________________________________________________________________
 
+    if (message.author.bot && message.guild || message.system) return;
     if (message.channel.type === "dm") return;
-    if (message.author.bot || message.system) return;
 
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
       
