@@ -38,7 +38,7 @@ client.eventos = new Map();
 
 client.on("message", async message => {
 
-  const afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
+  let afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
   if (mentioned) {
   let status = await afk.get(mentioned.id);
 
@@ -55,7 +55,7 @@ client.on("message", async message => {
   
 //_____________________________comando de anti invites___________________
 
-    const blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
+    let blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
     blockinvite = blockinvite.val()
 
     if(blockinvite === "on") {
