@@ -1,15 +1,15 @@
 module.exports = async message => {
 
-    const client = new Discord.Client(
-    { partials: ["MESSAGE", "CHANNEL", "REACTION"] },
-    new Discord.Client({ disableEveryone: true }));
-
     const db = require(`quick.db`);
-    const { MessageEmbed } = require("discord.js")
+    const { Discord, MessageEmbed } = require("discord.js")
     const { prefix } = require("../../config.json")
     const jimp = require("jimp");
     const firebase = require('firebase')
     const database = firebase.database()
+
+    const client = new Discord.Client(
+    { partials: ["MESSAGE", "CHANNEL", "REACTION"] },
+    new Discord.Client({ disableEveryone: true }));
     
     if (message.author.bot && message.guild || message.system) return null;
     if (message.channel.type === "dm") return null;
