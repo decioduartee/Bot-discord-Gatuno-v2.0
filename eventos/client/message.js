@@ -1,4 +1,4 @@
-module.exports = message => {
+module.exports = async (message) => {
 
     const db = require(`quick.db`);
     const { MessageEmbed } = require("discord.js")
