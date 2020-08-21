@@ -1,6 +1,4 @@
 module.exports = message => {
-    if (message.author.bot && message.guild || message.system) return null;
-    if (message.channel.type === "dm") return null;
 
     const { MessageEmbed } = require("discord.js")
     const { prefix } = require("../../config.json")

@@ -37,6 +37,9 @@ client.eventos = new Map();
 
 client.on("message", async message => {
 
+  if (message.author.bot && message.guild || message.system) return null;
+  if (message.channel.type === "dm") return null;
+
 //__________________________________Modo afk____________________________
 
   const afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
