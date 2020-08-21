@@ -140,8 +140,8 @@ client.on("message", async message => {
 
 //______________________________________________________________________
 
-    if (message.author.bot && message.guild || message.system) return;
-    if (message.channel.type === "dm") return;
+    if (message.author.bot && message.guild || message.system) return null;
+    if (message.channel.type === "dm") return null;
 
     if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
       
@@ -154,11 +154,11 @@ client.on("message", async message => {
         message.channel.send(embed);
       }
 
-    if (!message.content.startsWith(prefix)) return;
+    if (!message.content.startsWith(prefix)) return null;
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const comando = args.shift().toLowerCase();
         const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-        if (!cmd) return;
+        if (!cmd) return null;
       
         cmd.run(client, message, args, database);
       
