@@ -4,7 +4,7 @@ const database = firebase.database() */
 
 module.exports = async (message, channel) => {
 
-    if (!message || message.channel.type !== 'text' || message.author.bot) return;
+    if (message.author.bot) return;
 
     /* let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalLog`).once(`value`)
     canais = canais.val() */
