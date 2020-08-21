@@ -38,6 +38,9 @@ client.eventos = new Map();
 
 client.on("message", async message => {
 
+  if (message.author.bot && message.guild || message.system) return null;
+  if (message.channel.type === "dm") return null;
+
   let afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
   if (mentioned) {
   let status = await afk.get(mentioned.id);
@@ -69,9 +72,6 @@ client.on("message", async message => {
         return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
       }
     }
-
-  if (message.author.bot && message.guild || message.system) return null;
-  if (message.channel.type === "dm") return null;
     
     let xp = "";
     let cats = "";
@@ -206,21 +206,7 @@ client.on("message", async message => {
   
     //______________________________________________________________________
 
-    client.on("messageDelete", async (message, channel) => {
-
-      let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalLog`).once(`value`)
-      canais = canais.val()
     
-      let DeleteEmbed = new MessageEmbed()
-        .setAuthor(`Mensagem Deletada`, message.guild.iconURL({dynamic: true}))
-        .setColor("#2f3136")
-        .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
-        .setDescription(`Registro de mensagens deletadas por ${message.author}. \n\n **• Informações** \n ▪︎ **Mensagem Deletada**: ${message} \n ▪︎ **No canal**: ${message.channel} \n ▪︎ **Servidor**: ${message.guild.name}`)
-    
-      const canal = message.guild.channels.cache.get(canais);
-        if (!canal) return;
-      return canal.send(DeleteEmbed);
-    })
 
     //____________________________________________________________________________
 
