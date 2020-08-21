@@ -3,7 +3,7 @@ const { prefix } = require("../../config.json");
 
 module.exports = {
     name: "perdao",
-    aliases: ["perdon", "perdão"],
+    aliases: ["perdon", "perdão", "perdoar"],
     category: "moderador",
     description: "puni membros",
     accessableby: "Moderador",
@@ -20,8 +20,8 @@ module.exports = {
             .setColor("#2f3136")
             .setThumbnail(client.user.displayAvatarURL())
             .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**`)
-            .addField(`**Use:**`, `• ${prefix}Perdoar \`< @Membro > < Motivo >\` \n\n > Lembrando que o Motivo é opcional \n > pois se não houver motivo \n > o mesmo será: **Nenhum motivo definido.**`)
-            .addField(`**Exemplo:**`, `• ${prefix}Perdoar \`@papito\` Perdoado por ser lindo igual eu`)
+            .addField(`**Use:**`, `• ${prefix}perdoar \`< @Membro > < Motivo >\` \n\n > Lembrando que o Motivo é opcional \n > pois se não houver motivo \n > o mesmo será: **Nenhum motivo definido.**`)
+            .addField(`**Exemplo:**`, `• ${prefix}perdoar \`@papito\` Perdoado por ser lindo igual eu`)
             .setFooter(`${message.client.user.username}: Lembrando que aliases desse comando é "${prefix}perdon"`, message.client.user.displayAvatarURL());
           message.channel.send(embed)
         }
@@ -43,3 +43,5 @@ module.exports = {
         })
     }
 }
+
+/* em desenvolvimento */
