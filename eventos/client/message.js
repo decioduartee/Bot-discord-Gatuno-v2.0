@@ -1,50 +1,39 @@
 module.exports = message => {
 
+    const db = require(`quick.db`);
     const { MessageEmbed } = require("discord.js")
-    const { prefix } = require("../../config.json")
     const firebase = require('firebase')
     const database = firebase.database()
 
-    if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
-      
-        const embed = new MessageEmbed()
+    const afk = new db.table("AFKs"), mentioned = await message.mentions.members.first();
+    if (mentioned) {
+    let status = await afk.get(mentioned.id);
+
+        if (status) {
+            const embed = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription(`<:certo:736447597102760007> **| MODO AFK ATIVADO** \n\n ${mentioned.user} Está em modo **AFK**\n\n**Lembrete**:\n\`\`\`fix\n${status}\`\`\``)
+                .setThumbnail(mentioned.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                .setTimestamp()
+                .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
+            message.channel.send(embed).then(i => i.delete({ timeout: 50000 }));
+        }
+    }
+  
+//_____________________________comando de anti invites___________________
+
+    let blockinvite = await database.ref(`Servidores/${message.guild.id}/Defesa/Blockinvite`).once('value')
+    blockinvite = blockinvite.val()
+
+    if(blockinvite === "on") {
+      let Link = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
+
+      if (Link.some(word => message.content.toLowerCase().includes(word))) {
+        await message.delete();
+        let embed = new MessageEmbed()
           .setColor("#2f3136")
-          .setAuthor(`Olá ${message.author.username}`, client.user.displayAvatarURL())
-          .setDescription(`Vi que você me mencionou no chat, se você estiver com duvidas..\nSem problemas estou aqui para te ajudar, se estiver com duvidas\nSobre meus comando Por Favor use **${prefix}ajuda**, qualquer outra duvida\nSobre o Servidor Por Favor entre em contato com um moderador`)
-          .setFooter(`Fui mencionado por ${message.author.username}`,message.author.displayAvatarURL())
-          .setTimestamp();
-        message.channel.send(embed);
+          .setDescription("**Por favor respeite as regas**! não mande convites neste servidor")
+        return message.channel.send(embed).then(m => m.delete({timeout: 10000}))
       }
-
-    if (!message.content.startsWith(prefix)) return null;
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
-        const comando = args.shift().toLowerCase();
-        const cmd = client.comandos.get(comando) || client.comandos.get(client.aliases.get(comando));
-        if (!cmd) return null;
-      
-    if (message.guild && !message.channel.permissionsFor(message.guild.me).has(cmd.botPerm, {checkAdmin: true})) {
-         const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-            .addField(`• **Informações:**`, [
-              "• **Mensagem:** Eu preciso de permissões para funcionar corretarmente",
-              `• **Permissões:** \`${cmd.botPerm.join('`, `')}\``,
-            ])
-            .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-        return message.channel.send(embed)
-    };
-
-    if (message.guild && message.guild.ownerID !== message.member.id && !message.channel.permissionsFor(message.member).has(cmd.userPerm, {checkAdmin: true})) {
-        const embed = new MessageEmbed()
-            .setColor("#2f3136")
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO EXECUTAR O COMANDO**`)
-            .addField(`• **Informações:**`, [
-            "• **Mensagem:** Você precisa de permissões para executar esse comando",
-            `• **Permissões:** \`${cmd.userPerm.join('`, `')}\``,
-            ])
-            .setFooter(`Atenciosamente, ${message.client.user.username}`, message.client.user.displayAvatarURL());
-        return message.channel.send(embed) 
-    };
-
-    cmd.run(client, message, args, database);
+    }
 }
