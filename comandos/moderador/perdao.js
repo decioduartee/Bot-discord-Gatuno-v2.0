@@ -11,9 +11,9 @@ module.exports = {
     botPerm: ["MANAGE_GUILD"],
     run: async (client, message, args, database) => {
         
-        /* let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalPunição`).once('value')
+        let canais = await database.ref(`Servidores/${message.guild.id}/Canais/CanalPunição`).once('value')
           canais = canais.val()
-        let canal = message.guild.channels.cache.get(canais) */
+        let canal = message.guild.channels.cache.get(canais)
         
         if(!args[0]) {
           const embed = new MessageEmbed()
@@ -40,6 +40,34 @@ module.exports = {
             msg.react("736703344906731562")
             msg.react("736703631243477072")
             msg.react("707833140953219134")
+
+            const mutefilter = (reaction, user) => reaction.emoji.id === '736703246969733120' && user.id === message.author.id;
+            const warnfilter = (reaction, user) => reaction.emoji.id === "736703344906731562" && user.id === message.author.id;
+            const banfilter = (reaction, user) => reaction.emoji.id === "736703631243477072" && user.id === message.author.id;
+            const cancelarfilter = (reaction, user) => reaction.emoji.id === "707833140953219134" && user.id === message.author.id;
+        
+            const unmute = msg.createReactionCollector(mutefilter)
+            const unwarn = msg.createReactionCollector(warnfilter)
+            const unban = msg.createReactionCollector(banfilter)
+            const cancelar = msg.createReactionCollector(cancelarfilter)
+
+            let muterole;
+            let dbmute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute/${membro.user.id}`).once('value')
+            let muteerole = message.guild.roles.cache.find(r => r.name === "muted")
+
+            if (!message.guild.roles.cache.has(dbmute)) {
+              muterole = muteerole
+            } else {
+              muterole = message.guild.roles.cache.get(dbmute)
+            }
+
+            cancelar.on('collect', r => {
+              msg.delete()
+              const embed = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription("<:certo:736447597102760007> **| Punição cancelada com sucesso!**")
+              message.channel.send(embed)
+            })
         })
     }
 }

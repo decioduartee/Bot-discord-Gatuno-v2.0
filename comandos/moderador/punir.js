@@ -141,7 +141,7 @@ module.exports = {
             return;
             }
 
-            database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute`).set(userRoles)
+            database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).set(userRoles)
             
             membro.roles.set([muterole.id]).then(() => {
             const embed = new MessageEmbed()
