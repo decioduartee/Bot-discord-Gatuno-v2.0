@@ -27,13 +27,13 @@ module.exports = {
         }
 
         /* let bannedMemberInfo = await message.guild */
-        let membro = message.mentions.users.first() || client.users.resolve(args[0]);
+        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || client.users.resolve(args[0])
         let motivo = args.slice(1).join(" ");
 
         const embed = new MessageEmbed()
             .setColor("#2f3136")
-            /* .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })) */
-            .setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
+            .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+            /* .setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL()) */
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
             .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdões:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
             .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
@@ -143,7 +143,7 @@ module.exports = {
             msg.delete();
 
             let membroUnban = await client.users.fetch(membro)
-            let ban = await msg.guild.fetchBans();
+            let ban = await message.guild.fetchBans();
             var user = ban.get(membroUnban.id);
 
             if (!ban.get(membroUnban.id)) {
@@ -164,7 +164,7 @@ module.exports = {
                 /* .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })) */
                 .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
                 .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
-                .addField("**Membro Perdoado:**", `• ${membro}`)
+                .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.tag}`)
                 .addField(`**ID do membro**`, `• ${membro.id}`)
                 .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
                 .setTimestamp()
