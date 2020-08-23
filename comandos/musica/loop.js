@@ -3,7 +3,7 @@ const { prefix } = require("../../config.json");
 
 module.exports = {
     name: "loop",
-    aliases: ["l"],
+    aliases: ["lp"],
     description: "Use play <nome/url da musica> para tocar uma musica",
     run: async (client, message, args) => {
       
@@ -27,9 +27,7 @@ module.exports = {
     return;
     }
     
-    //OOOOF
     serverQueue.loop = !serverQueue.loop
-    
     
     embed.setDescription(`${serverQueue.loop ? "<:loop:733925306427113572> **| LOOP ESTÁ:** \n\n • Ativado" : "<:Noloop:733925306112671745> **| LOOP ESTÁ:** \n\n • Desativado"}`)
     message.channel.send(embed)

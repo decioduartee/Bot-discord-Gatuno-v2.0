@@ -90,11 +90,11 @@ module.exports = {
             membro.roles.remove(muterole.id).then(() => {
                 const embed = new MessageEmbed()
                     .setColor("#2f3136")
-                    .setThumbnail(message.guild.iconURL())
+                    .setThumbnail(message.guild.iconURL({ format: "png", size: 2048, dynamic: true }))
                     .setDescription(`Olá, você acaba de ser Desmutado`)
-                    .addField('Servidor', `${message.guild.name}`)
-                    .addField("Moderador responsavel", message.author)
-                    .addField('Motivo', `${motivo || "Nenhum motivo definido"}`)
+                    .addField('Servidor', `• ${message.guild.name}`)
+                    .addField("Moderador responsavel", `• ${message.author} | ${message.author.username}`)
+                    .addField('Motivo', `• ${motivo || "Nenhum motivo definido"}`)
                     .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
                     .setTimestamp()
                 membro.send(embed).catch(() => null)
@@ -113,7 +113,7 @@ module.exports = {
               .setColor("#2f3136")
               .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
               .setDescription("<:certo:736447597102760007> **| MUTE PERDOADO**")
-              .addField("**Moderador responsavel:**", `• ${message.author}`)
+              .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
               .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
               .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
@@ -122,7 +122,13 @@ module.exports = {
             if(!canal) {
               return message.channel.send(desmutado)
             }
+
             canal.send(desmutado)
+
+            const avisomute = new MessageEmbed()
+              .setColor("#2f3136")
+              .setDescription("<:certo:736447597102760007> **| SUCESSO AO MUTAR O MEMBRO**")
+            message.channel.send(avisomute)
           })
 
 
