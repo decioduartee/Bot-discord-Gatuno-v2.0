@@ -35,9 +35,9 @@ module.exports = {
         const embed = new MessageEmbed()
             .setColor("#2f3136")
             if(thumb === null || thumb === undefined) {
-              embed.setThumbnail('https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png')               
+              embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))              
             } else {
-              embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+              embed.setThumbnail('https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png')               
             }
             embed.setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
