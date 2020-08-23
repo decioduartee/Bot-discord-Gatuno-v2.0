@@ -160,11 +160,16 @@ module.exports = {
             message.guild.members.unban(userFetch.id, {reason: motivo});
 
             try {
-              msg.delete()
+              let thumb = membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })
+
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
-                /* .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })) */
-                .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
+                if(thumb === null || thumb === undefined) {
+                  embed.setThumbnail(userFetch.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                } else {
+                  embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                };                
+                embed.setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
                 .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
                 .addField("**Membro Perdoado:**", `• ${userFetch} | ${userFetch.tag}`)
                 .addField(`**ID do membro**`, `• ${userFetch.id}`)
