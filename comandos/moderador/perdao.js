@@ -142,8 +142,9 @@ module.exports = {
           unban.on('collect', async r => {
             msg.delete();
 
+            let user = args.shift()
             let bans = await message.guild.fetchBans() 
-            let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase() || ban.user.id === membro))
+            let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
             let userFetch = await client.users.fetch(banned.user.id);
 
             if (!banned) {
