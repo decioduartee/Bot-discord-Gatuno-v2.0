@@ -147,7 +147,7 @@ module.exports = {
             let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
             let userFetch = await client.users.fetch(banned.user.id);
 
-            if (!banned) {
+            if (!bans.get(member.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desbanir!`)
