@@ -2,7 +2,7 @@ module.exports = {
     name: "setmute",
     aliases: ["setmute", "setcargomute", "mutecargo"],
     category: "configuraveis",
-    run: async (client, message, args, database) => {
+    run: async (client, message, database) => {
       const { MessageEmbed } = require(`discord.js`);
 
       if (!message.member.hasPermission("ADMINISTRATOR")) {

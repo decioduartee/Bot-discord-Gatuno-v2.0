@@ -55,7 +55,7 @@ module.exports = {
 
           unmute.on('collect', async r => {
             let muterole;
-            let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`);
+            let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`).once('value');
               cargoMute = cargoMute.val()
             let muteerole = message.guild.roles.cache.find(r => r.name === "Silenciado")
 
