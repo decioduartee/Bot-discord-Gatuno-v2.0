@@ -98,9 +98,8 @@ module.exports = {
             const userRoles = membro.roles.cache.filter(r => r.id !== message.guild.id).map(r => r.id)
 
             let muterole;
-            let dbmute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargoMute`).once("value")
-            dbmute = dbmute.val()
-            
+            let dbmute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`).once("value")
+              dbmute = dbmute.val()
             let membrorole = message.guild.roles.cache.find(r => r.name === "Silenciado")
 
             if (!message.guild.roles.cache.has(dbmute)) {
@@ -126,7 +125,7 @@ module.exports = {
                         })
                     })
                 } catch (e) {
-                    console.log(e);
+                  console.log(e);
                 }
             };
 
