@@ -144,11 +144,10 @@ module.exports = {
 
             msg.guild.fetchBans().then(bans=> {
               if(bans.size == 0) return 
-              let bUser = bans.find(b => b.user.id == membro)
-              if(!bUser) return
+              let bUser = bans.find(b => b.user.id == membro.id)
               msg.guild.members.unban(bUser.user)
 
-            if (!ban.get(membroUnban.id)) {
+            if (!bUser) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desmutar!`)
