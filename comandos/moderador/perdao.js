@@ -54,6 +54,7 @@ module.exports = {
             const cancelar = msg.createReactionCollector(cancelarfilter)
 
           unmute.on('collect', async r => {
+            msg.delete();
             let muterole;
             let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`).once('value');
               cargoMute = cargoMute.val()
