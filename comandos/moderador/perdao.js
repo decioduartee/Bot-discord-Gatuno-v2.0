@@ -178,8 +178,7 @@ module.exports = {
                     .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
                   message.channel.send(avisoban)
               }
-              canal.send(embed).then(() =>
-                  message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+              canal.send(embed)
   
                   const avisoban = new MessageEmbed()
                     .setColor("#2f3136")
