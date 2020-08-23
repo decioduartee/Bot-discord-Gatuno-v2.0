@@ -30,9 +30,11 @@ module.exports = {
         
         let motivo = args.slice(1).join(" ");
 
+        let thumb = membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })
+
         const embed = new MessageEmbed()
             .setColor("#2f3136")
-            if(displayAvatarURL === null || displayAvatarURL === undefined) {
+            if(thumb === null || thumb === undefined) {
               embed.setThumbnail('https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png')               
             } else {
               embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
