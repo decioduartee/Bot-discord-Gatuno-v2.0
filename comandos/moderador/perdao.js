@@ -144,7 +144,7 @@ module.exports = {
 
             let bans = await message.guild.fetchBans() 
 
-            if (!bans.get(member.id)) {
+            if (!bans.get(membro.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desbanir!`)
