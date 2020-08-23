@@ -26,6 +26,7 @@ module.exports = {
           message.channel.send(embed)
         }
 
+        /* let bannedMemberInfo = await message.guild */
         let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
 
         let motivo = args.slice(1).join(" ");
@@ -121,15 +122,57 @@ module.exports = {
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
             
             if(!canal) {
-              return message.channel.send(desmutado)
+              message.channel.send(desmutado).then(() =>
+              message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+  
+              const avisoban = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
+              message.channel.send(avisoban)
             }
-
-            canal.send(desmutado)
-
-            const avisomute = new MessageEmbed()
+              canal.send(desmutado).then(() =>
+              message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+  
+            const avisoban = new MessageEmbed()
               .setColor("#2f3136")
-              .setDescription("<:certo:736447597102760007> **| SUCESSO AO MUTAR O MEMBRO**")
-            message.channel.send(avisomute)
+              .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
+            message.channel.send(avisoban)
+          })
+
+          unban.on('collect', async r => {
+            msg.delete();
+            await membro.fetchBans()
+            try {
+              msg.delete()
+              const embed = new MessageEmbed()
+                .setColor("#2f3136")
+                .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
+                .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
+                .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
+                .addField(`**ID do membro**`, `• ${membro.id}`)
+                .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
+                .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
+              if(!canal) {
+                message.channel.send(embed).then(() =>
+                  message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+  
+                  const avisoban = new MessageEmbed()
+                    .setColor("#2f3136")
+                    .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
+                  message.channel.send(avisoban)
+              }
+              canal.send(embed).then(() =>
+                  message.guild.members.ban(membro, { reason: motivo })).catch(() => null)
+  
+                  const avisoban = new MessageEmbed()
+                    .setColor("#2f3136")
+                    .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
+                  message.channel.send(avisoban)
+  
+              } catch {
+                  message.guild.members.ban(membro, { reason: motivo })
+              }
           })
 
 
