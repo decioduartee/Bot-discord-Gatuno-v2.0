@@ -28,6 +28,8 @@ module.exports = {
 
         let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
 
+        let motivo = args.slice(1).join(" ");
+
         const embed = new MessageEmbed()
             .setColor("#2f3136")
             .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
@@ -51,23 +53,86 @@ module.exports = {
             const unban = msg.createReactionCollector(banfilter)
             const cancelar = msg.createReactionCollector(cancelarfilter)
 
+          unmute.on('collect', r => {
             let muterole;
-            let dbmute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute/${membro.user.id}`).once('value')
-            let muteerole = message.guild.roles.cache.find(r => r.name === "muted")
+            let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`);
+              cargoMute = cargoMute.val()
+            let muteerole = message.guild.roles.cache.find(r => r.name === "Silenciado")
 
-            if (!message.guild.roles.cache.has(dbmute)) {
+            if (!message.guild.roles.cache.has(cargoMute)) {
               muterole = muteerole
             } else {
-              muterole = message.guild.roles.cache.get(dbmute)
+              muterole = message.guild.roles.cache.get(cargoMute)
             }
 
-            cancelar.on('collect', r => {
-              msg.delete()
+            let cargosAntesDoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).once('value')
+              cargosAntesDoMute = cargosAntesDoMute.val()
+            if (!cargosAntesDoMute) return;
+
+            if (!muterole){
               const embed = new MessageEmbed()
-                .setColor("#2f3136")
-                .setDescription("<:certo:736447597102760007> **| Punição cancelada com sucesso!**")
-              message.channel.send(embed)
+                  .setColor("#2f3136")
+                  .setDescription(`<:errado:736447664329326613> **| ERRO AO DESMUTAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
+                  .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                  .setTimestamp()
+            return message.channel.send(embed)
+            }
+            if (!membro.roles.cache.has(muterole.id)) {
+              const embed = new MessageEmbed()
+              .setColor("#2f3136")
+              .setDescription(`<:errado:736447664329326613> **| ERRO AO DESMUTAR**\n **• Informações** \n **Mensagem:** Esse membro não está mutado!`)
+              .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+              .setTimestamp()
+            return message.channel.send(embed)
+            }
+
+            try {
+            membro.roles.remove(muterole.id).then(() => {
+                const embed = new MessageEmbed()
+                    .setColor("#2f3136")
+                    .setThumbnail(message.guild.iconURL())
+                    .setDescription(`Olá, você acaba de ser Desmutado`)
+                    .addField('Servidor', `${message.guild.name}`)
+                    .addField("Moderador responsavel", message.author)
+                    .addField('Motivo', `${motivo || "Nenhum motivo definido"}`)
+                    .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                    .setTimestamp()
+                membro.send(embed).catch(() => null)
+                let roleadds = cargosAntesDoMute
+                if (!roleadds) return;
+                membro.roles.add(roleadds)
+                return;
             })
+            } catch {
+                let roleadds2 = cargosAntesDoMute
+                if (!roleadds2) return;
+                membro.roles.add(roleadds2)                            
+            }
+
+            const desmutado = new MessageEmbed()
+              .setColor("#2f3136")
+              .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+              .setDescription("<:certo:736447597102760007> **| MUTE PERDOADO**")
+              .addField("**Moderador responsavel:**", `• ${message.author}`)
+              .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
+              .addField(`**ID do membro**`, `• ${membro.id}`)
+              .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
+              .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
+            
+            if(!canal) {
+              return message.channel.send(desmutado)
+            }
+            canal.send(desmutado)
+          })
+
+
+          cancelar.on('collect', r => {
+            msg.delete()
+            const embed = new MessageEmbed()
+              .setColor("#2f3136")
+              .setDescription("<:certo:736447597102760007> **| Punição cancelada com sucesso!**")
+            message.channel.send(embed)
+          })
         })
     }
 }

@@ -86,7 +86,7 @@ module.exports = {
             let roleadds2 = rolefetched
             if (!roleadds2) return;
             mutee.roles.add(roleadds2)                            
-          }
+        }
             const sembed = new MessageEmbed()
                 .setColor("#206694")
                 .setAuthor(message.guild.name, message.guild.iconURL())

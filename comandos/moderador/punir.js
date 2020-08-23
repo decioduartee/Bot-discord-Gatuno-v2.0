@@ -101,7 +101,7 @@ module.exports = {
             let dbmute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargoMute`).once("value")
             dbmute = dbmute.val()
             
-            let membrorole = message.guild.roles.cache.find(r => r.name === "Mutado")
+            let membrorole = message.guild.roles.cache.find(r => r.name === "Silenciado")
 
             if (!message.guild.roles.cache.has(dbmute)) {
                 muterole = membrorole
@@ -113,8 +113,7 @@ module.exports = {
                 try {
                     muterole = await message.guild.roles.create({
                         data: {
-                            name: "Mutado",
-                            color: "#8d0000",
+                            name: "Silenciado",
                             permissions: []
                         }
                     })
