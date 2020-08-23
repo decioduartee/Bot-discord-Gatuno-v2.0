@@ -53,7 +53,7 @@ module.exports = {
             const unban = msg.createReactionCollector(banfilter)
             const cancelar = msg.createReactionCollector(cancelarfilter)
 
-          unmute.on('collect', r => {
+          unmute.on('collect', async r => {
             let muterole;
             let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`);
               cargoMute = cargoMute.val()
