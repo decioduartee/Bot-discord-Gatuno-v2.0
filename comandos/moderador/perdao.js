@@ -145,7 +145,7 @@ module.exports = {
             let membroUnban = await client.users.fetch(membro)
             let ban = await message.guild.fetchBans();
 
-            if (!ban.get(member.id)) {
+            if (!ban.get(membro.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desmutar!`)
@@ -162,8 +162,8 @@ module.exports = {
                 .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                 .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
                 .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
-                .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
-                .addField(`**ID do membro**`, `• ${membro.id}`)
+                .addField("**Membro Perdoado:**", `• ${membro.user.username} | ${membro.user.tag}`)
+                .addField(`**ID do membro**`, `• ${membro.user.id}`)
                 .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
                 .setTimestamp()
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
