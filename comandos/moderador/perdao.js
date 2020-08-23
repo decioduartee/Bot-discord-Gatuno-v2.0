@@ -28,6 +28,8 @@ module.exports = {
 
         /* let bannedMemberInfo = await message.guild */
         let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+        let membroUnban = await client.users.fetch(membro)
+        let ban = await message.guild.fetchBans();
 
         let motivo = args.slice(1).join(" ");
 
@@ -74,7 +76,7 @@ module.exports = {
             if (!muterole){
               const embed = new MessageEmbed()
                   .setColor("#2f3136")
-                  .setDescription(`<:errado:736447664329326613> **| ERRO AO DESMUTAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
+                  .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
                   .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
                   .setTimestamp()
             return message.channel.send(embed)
@@ -82,7 +84,7 @@ module.exports = {
             if (!membro.roles.cache.has(muterole.id)) {
               const embed = new MessageEmbed()
               .setColor("#2f3136")
-              .setDescription(`<:errado:736447664329326613> **| ERRO AO DESMUTAR**\n **• Informações** \n **Mensagem:** Esse membro não está mutado!`)
+              .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está mutado!`)
               .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
               .setTimestamp()
             return message.channel.send(embed)
@@ -119,6 +121,7 @@ module.exports = {
               .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
               .addField(`**ID do membro**`, `• ${membro.id}`)
               .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
+              .setTimestamp()
               .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
             
             if(!canal) {
@@ -141,7 +144,17 @@ module.exports = {
 
           unban.on('collect', async r => {
             msg.delete();
-            await membro.fetchBans()
+
+            if (!ban.get(member.id)) {
+              const ErroUnban = new MessageEmbed()
+                .setColor("#2f3136")
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desmutar!`)
+                .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL())
+                .setTimestamp()
+              return message.channel.send(ErroUnban)
+            }
+
+            message.guild.members.unban(membroUnban);
             try {
               msg.delete()
               const embed = new MessageEmbed()
@@ -152,6 +165,7 @@ module.exports = {
                 .addField("**Membro Perdoado:**", `• ${membro} | ${membro.user.username}`)
                 .addField(`**ID do membro**`, `• ${membro.id}`)
                 .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
+                .setTimestamp()
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
               if(!canal) {
                 message.channel.send(embed).then(() =>
