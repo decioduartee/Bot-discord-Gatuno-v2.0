@@ -142,10 +142,7 @@ module.exports = {
           unban.on('collect', async r => {
             msg.delete();
 
-            let user = args.shift()
             let bans = await message.guild.fetchBans() 
-            let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
-            let userFetch = await client.users.fetch(banned.user.id);
 
             if (!bans.get(member.id)) {
               const ErroUnban = new MessageEmbed()
@@ -155,6 +152,10 @@ module.exports = {
                 .setTimestamp()
               return message.channel.send(ErroUnban)
             }
+
+            let user = args.shift()
+            let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
+            let userFetch = await client.users.fetch(banned.user.id);
 
             message.guild.members.unban(userFetch.id, {reason: motivo});
 
