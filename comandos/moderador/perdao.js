@@ -27,7 +27,7 @@ module.exports = {
         }
 
         /* let bannedMemberInfo = await message.guild */
-        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || client.users.resolve(args[0]);
         let motivo = args.slice(1).join(" ");
 
         const embed = new MessageEmbed()
@@ -142,14 +142,14 @@ module.exports = {
           unban.on('collect', async r => {
             msg.delete();
 
-            let membroUnban = await client.users.fetch(membro.id)
+            let membroUnban = await client.users.fetch(membro)
             let ban = await msg.guild.fetchBans();
             var user = ban.get(membro.id);
 
             if (!ban.get(membroUnban.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
-                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desmutar!`)
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desbanir!`)
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL())
                 .setTimestamp()
               return message.channel.send(ErroUnban)
@@ -165,7 +165,7 @@ module.exports = {
                 .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
                 .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
                 .addField("**Membro Perdoado:**", `• ${membro.user.username} | ${membro.user.tag}`)
-                .addField(`**ID do membro**`, `• ${membro.user.id}`)
+                .addField(`**ID do membro**`, `• ${membro.id}`)
                 .addField("**Motivo do perdão:**", `• ${motivo || "Nenhum motivo definido."}`)
                 .setTimestamp()
                 .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
