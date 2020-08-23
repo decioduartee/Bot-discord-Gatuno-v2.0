@@ -27,7 +27,7 @@ module.exports = {
         }
 
         let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || client.users.resolve(args[0])
-               
+        const thumb = membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })
         let motivo = args.slice(1).join(" ");
 
         const embed = new MessageEmbed()
@@ -160,12 +160,10 @@ module.exports = {
             message.guild.members.unban(userFetch.id, {reason: motivo});
 
             try {
-              let thumb = membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })
-
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
                 if(thumb === null || thumb === undefined) {
-                  embed.setThumbnail(userFetch.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                  embed.setThumbnail('https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png')
                 } else {
                   embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                 };                
