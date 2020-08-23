@@ -155,7 +155,7 @@ module.exports = {
               return message.channel.send(ErroUnban)
             }
 
-            msg.guild.members.unban(membroUnban.id);
+            message.guild.members.unban(membroUnban);
 
             try {
               msg.delete()
