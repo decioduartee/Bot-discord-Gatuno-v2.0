@@ -27,7 +27,7 @@ module.exports = {
         }
 
         /* let bannedMemberInfo = await message.guild */
-        let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase())
+        let membro = message.mentions.users.first() || client.users.resolve(args[0]);
         let motivo = args.slice(1).join(" ");
 
         const embed = new MessageEmbed()
