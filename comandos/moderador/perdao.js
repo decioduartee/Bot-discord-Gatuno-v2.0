@@ -142,8 +142,9 @@ module.exports = {
           unban.on('collect', async r => {
             msg.delete();
 
-            let membroUnban = await client.users.fetch(membro)
+            let membroUnban = await client.users.fetch(membro.id)
             let ban = await msg.guild.fetchBans();
+            var user = ban.get(membro.id);
 
             if (!ban.get(membroUnban.id)) {
               const ErroUnban = new MessageEmbed()
@@ -155,7 +156,7 @@ module.exports = {
             }
 
             msg.guild.members.unban(membroUnban.id);
-            
+
             try {
               msg.delete()
               const embed = new MessageEmbed()
