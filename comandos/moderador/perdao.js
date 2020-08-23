@@ -161,7 +161,7 @@ module.exports = {
               msg.delete()
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
-                .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                /* .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true })) */
                 .setDescription("<:certo:736447597102760007> **| BAN PERDOADO**")
                 .addField("**Moderador responsavel:**", `• ${message.author} | ${message.author.username}`)
                 .addField("**Membro Perdoado:**", `• ${membro.user.username} | ${membro.user.tag}`)
