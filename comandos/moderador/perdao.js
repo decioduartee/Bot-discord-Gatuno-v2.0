@@ -186,7 +186,7 @@ module.exports = {
                   message.channel.send(avisoban)
   
             } catch {
-              message.guild.members.ban(membro, { reason: motivo })
+              return;
             }
           })
 
