@@ -145,7 +145,7 @@ module.exports = {
             let membroUnban = await client.users.fetch(membro)
             let ban = await message.guild.fetchBans();
 
-            if (!ban.get(membro.id)) {
+            if (!ban.get(membroUnban.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está banido para desmutar!`)
@@ -154,7 +154,7 @@ module.exports = {
               return message.channel.send(ErroUnban)
             }
 
-            message.guild.members.unban(membroUnban);
+            message.guild.members.unban(membroUnban.id);
             try {
               msg.delete()
               const embed = new MessageEmbed()
@@ -184,9 +184,9 @@ module.exports = {
                     .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
                   message.channel.send(avisoban)
   
-              } catch {
-                  message.guild.members.ban(membro, { reason: motivo })
-              }
+            } catch {
+              message.guild.members.ban(membro, { reason: motivo })
+            }
           })
 
 
