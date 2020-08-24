@@ -32,7 +32,7 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setColor("#2f3136")
-            .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }) || "https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png")
+            .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }) && "https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png")
             embed.setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
             .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdões:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
