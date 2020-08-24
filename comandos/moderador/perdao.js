@@ -31,7 +31,7 @@ module.exports = {
         let motivo = args.slice(1).join(" ");
 
         const bans = await message.guild.fetchBans()
-        const bannedUser = banList.find(user => user.id === membro);
+        const bannedUser = bans.find(user => user.id === membro);
 
         const embed = new MessageEmbed()
             .setColor("#2f3136")
