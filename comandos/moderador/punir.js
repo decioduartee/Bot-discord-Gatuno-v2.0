@@ -29,6 +29,14 @@ module.exports = {
         }
       
       let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+      if(!membro) {
+        const embed = new MessageEmbed()
+          .setColor("#2f3136")
+          .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está no servidor!`)
+          .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+          .setTimestamp()
+        return message.channel.send(embed)
+      }
       
       let motivo = args.slice(1).join(" ");
         

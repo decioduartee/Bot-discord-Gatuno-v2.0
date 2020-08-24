@@ -27,7 +27,14 @@ module.exports = {
         }
 
         let membro = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || client.users.resolve(args[0])
-        
+        if(!membro) {
+          const embed = new MessageEmbed()
+            .setColor("#2f3136")
+            .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está no servidor!`)
+            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+            .setTimestamp()
+          return message.channel.send(embed)
+        }
         let motivo = args.slice(1).join(" ");
 
         const bans = await message.guild.fetchBans()
@@ -35,11 +42,8 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setColor("#2f3136")
-            if(bannedUser) {
-              embed.setThumbnail("https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png")
-            } else {
-              embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-            }
+            if(bannedUser) await embed.setThumbnail("https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png");
+            else await embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
             embed.setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
             .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdões:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
