@@ -35,16 +35,13 @@ module.exports = {
             .setTimestamp()
           return message.channel.send(embed)
         }
+
         let motivo = args.slice(1).join(" ");
-
-        const bans = await message.guild.fetchBans()
-        const bannedUser = bans.find(user => user.id === membro);
-
+  
         const embed = new MessageEmbed()
             .setColor("#2f3136")
-            if(bannedUser) await embed.setThumbnail("https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png");
-            else await embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
-            embed.setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
+            .setThumbnail("https://cdn.discordapp.com/attachments/705905702648152144/746948905953918978/sem_foto.png") || embed.setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+            .setAuthor(`COMO DESEJA PERDOA ESTE MEMBRO?`, client.user.displayAvatarURL())
             .setDescription(`» Reaja a baixo com o emoji corespondente ao perdão`)
             .addField(`• **Informações** `, `▪︎ **Membro a ser Perdoado:** ${membro} \n ▪︎ **Moderador responsavel:** ${message.author} \n\n • **Perdões:** \n <:offline:736703246969733120> Use para perdoar um mute de um membro \n <:ausente:736703344906731562> Use para perdoa um warn de um membro \n <:ocupado:736703631243477072> Use para perdoar um ban de um membro`)
             .setFooter(`Atenciosamente ${message.client.user.username}`, message.client.user.displayAvatarURL());
@@ -165,6 +162,7 @@ module.exports = {
             let user = args.shift()
             let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
             let userFetch = await client.users.fetch(banned.user.id);
+            let bans = await message.guild.fetchBans();
 
             message.guild.members.unban(userFetch.id, {reason: motivo});
 
@@ -200,7 +198,6 @@ module.exports = {
               return;
             }
           })
-
 
           cancelar.on('collect', r => {
             msg.delete()
