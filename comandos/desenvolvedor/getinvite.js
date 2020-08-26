@@ -11,7 +11,7 @@ module.exports = {
       
       message.delete().catch(() => {})
       
-      const ownerid = "691107890609520670";
+      const ownerid = "683555315957891149";
       
         if (message.author.id === ownerid) {
         let guild = null;
