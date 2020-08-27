@@ -112,7 +112,7 @@ client.on('raw', async dados => {
           user.send(embeda).then(c => {
               setTimeout(() => {
                   c.delete()
-              }, 8000)
+              }, 10000)
           })
       })
         
@@ -138,9 +138,10 @@ client.on('raw', async dados => {
 
           Fechar.on('collect', r2 => {
               msg.delete()
-              x.send(`${membro}, o canal será deletado em 5 segundos!`)
+              x.send(`${membro}, o canal será deletado em 5 segundos..`)
               setTimeout(() => {
                   x.delete()
+                  database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).remove()
               }, 5000)
             })
           })
