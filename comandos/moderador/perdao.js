@@ -66,6 +66,7 @@ module.exports = {
             let muterole;
             let cargoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargoMute`).once('value');
               cargoMute = cargoMute.val()
+
             let muteerole = message.guild.roles.cache.find(r => r.name === "Silenciado")
 
             if (!message.guild.roles.cache.has(cargoMute)) {
@@ -78,12 +79,12 @@ module.exports = {
               cargosAntesDoMute = cargosAntesDoMute.val()
             if (!cargosAntesDoMute) return;
 
-            if (!muterole){
+            if (!cargoMute && muterole){
               const embed = new MessageEmbed()
-                  .setColor("#2f3136")
-                  .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
-                  .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-                  .setTimestamp()
+                .setColor("#2f3136")
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
+                .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                .setTimestamp()
             return message.channel.send(embed)
             }
             if (!membro.roles.cache.has(muterole.id)) {
@@ -152,6 +153,8 @@ module.exports = {
           unban.on('collect', async r => {
             msg.delete(); 
 
+            let bans = await message.guild.fetchBans();
+
             if (!bans.get(membro.id)) {
               const ErroUnban = new MessageEmbed()
                 .setColor("#2f3136")
@@ -161,7 +164,6 @@ module.exports = {
               return message.channel.send(ErroUnban)
             }
 
-            let bans = await message.guild.fetchBans();
             let user = args.shift()
             let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
             let userFetch = await client.users.fetch(banned.user.id);

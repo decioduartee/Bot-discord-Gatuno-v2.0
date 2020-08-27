@@ -52,3 +52,5 @@ module.exports = async (client, guild) => {
     database.ref(`/Servidores/${guild.id}`).remove(); 
   }, 1000);
 };
+
+const { MessageEmbed } = require('discord.js');
