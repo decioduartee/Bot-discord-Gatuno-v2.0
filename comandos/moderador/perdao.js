@@ -79,7 +79,7 @@ module.exports = {
               cargosAntesDoMute = cargosAntesDoMute.val()
             if (!cargosAntesDoMute) return;
 
-            if (!cargoMute && muterole){
+            if (!cargoMute || muterole){
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
                 .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargosAntesDoMute} ]** para remover!`)
