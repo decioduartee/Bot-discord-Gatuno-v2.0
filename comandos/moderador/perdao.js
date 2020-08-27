@@ -110,6 +110,10 @@ module.exports = {
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
                 membro.roles.add(roleadds)
+
+                setTimeout(function(){
+                  db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+                }, 1000);
               return;
             })
             } catch {
@@ -184,10 +188,6 @@ module.exports = {
             } catch {
               return;
             }
-
-            setTimeout(function(){
-              db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
-            }, 1000);
           })
 
           cancelar.on('collect', r => {
