@@ -1,7 +1,9 @@
 module.exports = {
     name: "fechar",
     description: "crie um tiket",
-    run: (client, message) => {
+    run: async (client, message) => {
+        const firebase = require('firebase');
+        const database = firebase.database();
         const { MessageEmbed } = require("discord.js")
 
         let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
