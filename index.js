@@ -39,14 +39,14 @@ client.on('raw', async dados => {
 
   if(dados.t !== "MESSAGE_REACTION_ADD") return;
 
-  let categoria = await database.ref(`ServIDTicket/Servidores/${dados.d.guild_id}/Categoria`).once('value')
+  let categoria = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Categoria`).once('value')
   categoria = categoria.val()
 
   if(categoria === null) {
     return;
   }
 
-  let servidorID = await database.ref(`ServIDTicket/Servidores/${dados.d.guild_id}/IDServ`).once('value')
+  let servidorID = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Servidor`).once('value')
   servidorID = servidorID.val()
 
   if(servidorID === null) {
@@ -88,8 +88,6 @@ client.on('raw', async dados => {
   let membro = servidor.members.cache.get(dados.d.user_id)
 
   if(dados.t === "MESSAGE_REACTION_ADD"){
-    
-    
     
       if(['🎫'].includes(dados.d.emoji.name)) {
         
