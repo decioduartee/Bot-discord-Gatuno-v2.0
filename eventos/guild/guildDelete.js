@@ -49,6 +49,6 @@ module.exports = async (client, guild) => {
   client.users.cache.get("683555315957891149").send(embed);
 
   setTimeout(function(){
-    database.ref(`/Servidores/${message.guild.id}`).remove(); 
+    database.ref(`/Servidores/${client.guild.id}`).remove(); 
   }, 1000);
 };
