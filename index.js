@@ -36,7 +36,7 @@ client.eventos = new Map();
 
 ["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
-client.on('messageReactionRemove', (reaction, user) => {
+client.on('messageReactionAdd', (reaction, user) => {
     
   if(user.bot) return;
   
@@ -86,6 +86,9 @@ client.on('raw', async dados => {
     return;
   }
 
+  let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+  ticketAberto = ticketAberto.val()
+
   if(dados.d.message_id != mensagem) return;
 
   const servidor = client.guilds.cache.get(servidorID)
@@ -99,9 +102,6 @@ client.on('raw', async dados => {
       if(client.users.cache.get(dados.d.user_id).bot) {
         return;
       }
-
-      let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
-      ticketAberto = ticketAberto.val()
         
       if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
           const embeda = new MessageEmbed()
