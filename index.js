@@ -52,42 +52,42 @@ client.on('raw', async dados => {
 
   if(dados.t !== "MESSAGE_REACTION_ADD") return;
 
-  let categoria = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Categoria`).once('value')
+  let categoria = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Categoria`).once('value')
   categoria = categoria.val()
 
   if(categoria === null) {
     return;
   }
 
-  let servidorID = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Servidor`).once('value')
+  let servidorID = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Servidor`).once('value')
   servidorID = servidorID.val()
 
   if(servidorID === null) {
     return;
   }
 
-  let mensagem = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Mensagem`).once('value')
+  let mensagem = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Mensagem`).once('value')
   mensagem = mensagem.val()
 
   if(mensagem === null) {
     return;
   }
 
-  let canal = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Canal`).once('value')
+  let canal = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Canal`).once('value')
   canal = canal.val()
 
   if(canal === null) {
     return;
   }
 
-  let role = await database.ref(`Servidores/${dados.d.guild.id}/Ticket/Cargo`).once('value')
+  let role = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Cargo`).once('value')
   role = role.val()
 
   if(role === null) {
     return;
   }
 
-  let ticketAberto = await database.ref(`Servidores/${dados.d.guild.id}/TicketAberto/${dados.d.user_id}`).once('value')
+  let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
   ticketAberto = ticketAberto.val()
 
   if(ticketAberto === null) {
@@ -139,7 +139,7 @@ client.on('raw', async dados => {
       
       servidor.channels.create(`ticket-${membro.user.username}`, {type: "text"
         }).then(x => {
-              database.ref(`Servidores/${dados.d.guild.id}/TicketAberto/${dados.d.user_id}`).set(x.id)
+              database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).set(x.id)
               x.setParent(categoria)
               x.updateOverwrite(membro.guild.roles.everyone, {VIEW_CHANNEL: false})
               x.updateOverwrite(membro, {VIEW_CHANNEL: true})
