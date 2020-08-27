@@ -1,6 +1,8 @@
 module.exports = async (reaction, user) => {
 
-let message = reaction.message, emoji = reaction.emoji;
+    console.log("deu certo")
+
+/* let message = reaction.message, emoji = reaction.emoji;
   
   if(user.bot) return;
 
@@ -8,5 +10,5 @@ let message = reaction.message, emoji = reaction.emoji;
     message.guild.members.fetch(user.id).then(x => {
         reaction.users.remove(user)
     });
-  }
+  } */
 }
