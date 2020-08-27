@@ -3,12 +3,49 @@ const firebase = require('firebase')
 const database = firebase.database()
 
 module.exports = async (client, guild) => {
+
+  let vccount = 0;
+  let textcount = 0;
+  let newscount = 0;
+  let storecount = 0;
+  let categorycount = 0;
+  let totalchannel = message.guild.channels.cache.size.toLocaleString()
+  guild.channels.cache.map(c => {
+    if (c.type === "text") {
+      textcount += 1;
+    } else if (c.type === "voice") {
+      vccount += 1;
+    } else if (c.type === "news") {
+      newscount += 1;
+    } else if (c.type === "store") {
+      storecount += 1;
+    } else if (c.type === "category") {
+      categorycount += 1;
+    }
+  });
+
   let embed = new MessageEmbed()
     .setAuthor(`Fui removido de um servidor`, client.user.displayAvatarURL())
     .setThumbnail(guild.iconURL({ format: "png", size: 2048, dynamic: true }))
     .addField(`**Servidor**`, guild.name, true)
     .addField(`**Dono**`, `${guild.owner} | ${guild.owner.user.username}` , true)
     .addField(`**ID**`, `${guild.id}`, true)
+    .addField(
+      `**CANAIS**`,
+      `• Total de Canais ${
+        totalchannel
+      }\n • Total de Categorias ${
+        categorycount
+      }\n • Canais de Mensagem ${
+        textcount
+      }\n • Canais de Voz ${
+        vccount
+      }\n • Canais de Loja ${
+        storecount
+      }\n • Canais de Notícias ${
+        newscount
+      }`, true
+    )
     .addField(
       `USERS`,
       `• Pessoas » ${
@@ -17,16 +54,6 @@ module.exports = async (client, guild) => {
         guild.memberCount.toLocaleString()
       }\n • Bots » ${
         guild.members.cache.filter(mem => mem.user.bot === true).size.toLocaleString()
-      }`, true
-    )
-    .addField(
-      `**CANAIS**`,
-      `• Total de canais ${
-        guild.channels.cache.size.toLocaleString()
-      }\n • Canais de voz ${
-        guild.channels.cache.filter(channel => channel.type == "voice").size
-      }\n • Canais de Mensagem ${
-        guild.channels.cache.filter(channel => channel.type == "text").size
       }`, true
     )
     .addField(`STATUS`,

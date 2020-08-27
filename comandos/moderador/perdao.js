@@ -77,12 +77,11 @@ module.exports = {
 
             let cargosAntesDoMute = await database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).once('value')
               cargosAntesDoMute = cargosAntesDoMute.val()
-            if (!cargosAntesDoMute) return;
 
             if (!muterole){
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
-                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${muterole} ]** para remover!`)
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargoMute} ]** para remover!`)
                 .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
                 .setTimestamp()
               message.channel.send(embed)
