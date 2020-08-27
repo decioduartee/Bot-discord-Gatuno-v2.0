@@ -37,15 +37,16 @@ client.eventos = new Map();
 ["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
 client.on('messageReactionAdd', (reaction, user) => {
-    
-  if(user.bot) return;
+  let message = reaction.message, emoji = reaction.emoji;
   
-  if (reaction.emoji.name === '🎫') {
-    reaction.message.guild.members.fetch(user.id).then(x => {
-      reaction.users.remove(user)
+  if(user.bot) return;
+
+  if (emoji.name == '🎫') {
+      message.guild.members.fetch(user.id).then(member => {
+        reaction.users.remove(user)
     });
   }
-})
+});
 
 client.on('raw', async dados => {
 
