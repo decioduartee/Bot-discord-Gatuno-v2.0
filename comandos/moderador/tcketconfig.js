@@ -106,6 +106,7 @@ module.exports = {
         const embeda = new MessageEmbed()
       
             .setTitle('FINALIZAÇÃO')
+            .setColor("#2f3136")
             .setDescription('Deseja habilitar o sistema?\n\nCaso queira, reaja com: ✅!\n Caso queira desabilitar o sistema, reaja com: ❎!')
             .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
             .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
