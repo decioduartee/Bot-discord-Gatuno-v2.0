@@ -110,12 +110,21 @@ module.exports = {
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
                 membro.roles.add(roleadds)
+
+                setTimeout(function(){
+                  database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+                }, 1000);
+
               return;
             })
             } catch {
                 let roleadds2 = cargosAntesDoMute
                 if (!roleadds2) return;
               membro.roles.add(roleadds2) 
+
+              setTimeout(function(){
+                database.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+              }, 1000);
             }
 
             const desmutado = new MessageEmbed()
@@ -138,10 +147,6 @@ module.exports = {
               .setColor("#2f3136")
               .setDescription("<:certo:736447597102760007> **| SUCESSO AO PERDOAR O MEMBRO**")
             message.channel.send(avisoban)
-
-            setTimeout(function(){
-              db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
-            }, 1000);
           })
 
           unban.on('collect', async r => {
