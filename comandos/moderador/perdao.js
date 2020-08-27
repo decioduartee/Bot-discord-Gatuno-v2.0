@@ -109,13 +109,15 @@ module.exports = {
                 membro.send(embed).catch(() => null)
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
-                membro.roles.add(roleadds)
+                membro.roles.add(roleadds).then(msg => {
+                  db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove() 
+                }) 
                 return;
             })
             } catch {
                 let roleadds2 = cargosAntesDoMute
                 if (!roleadds2) return;
-              membro.roles.add(roleadds2).then(function() {
+              membro.roles.add(roleadds2).then(msg => {
                 db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove() 
               })                           
             }
