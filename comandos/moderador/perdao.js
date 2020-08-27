@@ -185,7 +185,7 @@ module.exports = {
               return;
             }
 
-            setTimeout(() => {
+            setTimeout(function(){
               db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
             }, 1000);
           })
