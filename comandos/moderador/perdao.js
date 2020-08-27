@@ -79,10 +79,10 @@ module.exports = {
               cargosAntesDoMute = cargosAntesDoMute.val()
             if (!cargosAntesDoMute) return;
 
-            if (!muterole){
+            if (!muteerole){
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
-                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargoMute} ]** para remover!`)
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${muteerole} ]** para remover!`)
                 .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
                 .setTimestamp()
             return message.channel.send(embed)
