@@ -110,15 +110,12 @@ module.exports = {
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
                 membro.roles.add(roleadds)
-                db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
               return;
             })
             } catch {
                 let roleadds2 = cargosAntesDoMute
                 if (!roleadds2) return;
-              membro.roles.add(roleadds2).then(msg => {
-                db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove() 
-              })                           
+              membro.roles.add(roleadds2)                         
             }
 
             const desmutado = new MessageEmbed()
@@ -187,6 +184,10 @@ module.exports = {
             } catch {
               return;
             }
+
+            setTimeout(() => {
+              db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+            }, 1000);
           })
 
           cancelar.on('collect', r => {
