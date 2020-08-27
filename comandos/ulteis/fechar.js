@@ -6,7 +6,7 @@ module.exports = {
         const database = firebase.database();
         const { MessageEmbed } = require("discord.js")
 
-        let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+        let ticketAberto = await database.ref(`Servidores/${message.guild.id}/TicketAberto/${message.author.id}`).once('value')
         ticketAberto = ticketAberto.val()
       
     if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
@@ -31,7 +31,7 @@ module.exports = {
             
             setTimeout(function(){
               message.channel.delete()
-              database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).remove()
+              database.ref(`Servidores/${message.guild.id}/TicketAberto/${message.author.id}`).remove()
             }, 5000)
         })
             

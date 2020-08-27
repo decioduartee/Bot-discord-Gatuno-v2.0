@@ -108,7 +108,7 @@ client.on('raw', async dados => {
           const embeda = new MessageEmbed()
               .setColor("#2f3136")
               .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você já possui um Ticket em aberto! \n • **Mensagem:** Para criar outro feche o que está em aberto.`)
-              .setFooter(`Reação adicionada por: ${membro.user.username}`, membro.user.displayAvatarURL())
+              .setFooter(`Reação adicionada por: ${membro.user.username}`, membro.user.displayAvatarURL({ dynamic: true }))
           client.users.fetch(membro.id,false).then(user => {
           user.send(embeda).then(c => {
               setTimeout(() => {
@@ -129,6 +129,7 @@ client.on('raw', async dados => {
               x.updateOverwrite(client.user.id,{VIEW_CHANNEL: true})
 
         const embedx = new MessageEmbed()
+          .setColor("#2f3136")
           .setTitle(`Olá ${membro.user.username}!`)
           .setDescription(`Seja bem vindo ao canal de ticket!\n Caso queira fechar o ticket, reaja com: ❎!`)
           .setFooter(`Ticket aberto por: ${membro.user.username}`, membro.user.displayAvatarURL({ dynamic: true }))
