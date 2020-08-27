@@ -10,23 +10,14 @@ module.exports = async (client, guild) => {
     .addField(`**Dono**`, `${guild.owner} | ${guild.owner.user.username}` , true)
     .addField(`**ID**`, `${guild.id}`, true)
     .addField(
-      `SATATUS`,
+      `USERS`,
       `Pessoas » ${
         guild.members.cache.filter(mem => !mem.user.bot === true).size.toLocaleString()
       }\n Membros: » ${
         guild.memberCount.toLocaleString()
       }\n Bots » ${
         guild.members.cache.filter(mem => mem.user.bot === true).size.toLocaleString()
-      }\n <:online:736703182196965479> online » ${
-        guild.members.cache.filter(mem => mem.presence.status === "online").size.toLocaleString()
-      }\n <:ocupado:736703631243477072> Não Perturbar » ${
-        guild.members.cache.filter(mem => mem.presence.status === "dnd").size.toLocaleString()
-      }\n <:ausente:736703344906731562> Ausente » ${
-        guild.members.cache.filter(mem => mem.presence.status === "idle").size.toLocaleString()
-      }\n <:offline:736703246969733120> Invissivel » ${
-        guild.members.cache.filter(mem => mem.presence.status === "offline").size.toLocaleString()
-      }`,
-      true
+      }`, true
     )
     .addField(
       `**CANAIS**`,
@@ -36,8 +27,18 @@ module.exports = async (client, guild) => {
         guild.channels.cache.filter(channel => channel.type == "voice").size
       }\n <:message:707824255068536923> Canais de Mensagem ${
         guild.channels.cache.filter(channel => channel.type == "text").size
-      }`,
-      true
+      }`, true
+    )
+    .addField(`STATUS`,
+      `<:online:736703182196965479> online » ${
+      guild.members.cache.filter(mem => mem.presence.status === "online").size.toLocaleString()
+      }\n <:ocupado:736703631243477072> Não Perturbar » ${
+      guild.members.cache.filter(mem => mem.presence.status === "dnd").size.toLocaleString()
+      }\n <:ausente:736703344906731562> Ausente » ${
+      guild.members.cache.filter(mem => mem.presence.status === "idle").size.toLocaleString()
+      }\n <:offline:736703246969733120> Invissivel » ${
+      guild.members.cache.filter(mem => mem.presence.status === "offline").size.toLocaleString()
+      }`
     )
     .addField(
       `**STATUS GATUNO**`,
