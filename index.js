@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const firebase = require("firebase");
+const { MessageEmbed } = require("discord.js")
 
 const client = new Discord.Client({ 
   partials: ["MESSAGE", "CHANNEL", "REACTION"] }, 
