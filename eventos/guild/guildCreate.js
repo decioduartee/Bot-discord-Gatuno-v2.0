@@ -9,21 +9,21 @@ module.exports = async (client, guild) => {
     .addField(`**ID**`, `${guild.id}`, true)
     .addField(
       `USERS`,
-      `Pessoas » ${
+      `• Pessoas » ${
         guild.members.cache.filter(mem => !mem.user.bot === true).size.toLocaleString()
-      }\n Membros: » ${
+      }\n • Membros: » ${
         guild.memberCount.toLocaleString()
-      }\n Bots » ${
+      }\n • Bots » ${
         guild.members.cache.filter(mem => mem.user.bot === true).size.toLocaleString()
       }`, true
     )
     .addField(
       `**CANAIS**`,
-      `Total de canais ${
+      `• Total de canais ${
         guild.channels.cache.size.toLocaleString()
-      }\n Canais de voz ${
+      }\n • Canais de voz ${
         guild.channels.cache.filter(channel => channel.type == "voice").size
-      }\n <:message:707824255068536923> Canais de Mensagem ${
+      }\n • Canais de Mensagem ${
         guild.channels.cache.filter(channel => channel.type == "text").size
       }`, true
     )
