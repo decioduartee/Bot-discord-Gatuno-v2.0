@@ -100,12 +100,8 @@ client.on('raw', async dados => {
         return;
       }
 
-      let ticketAberto = database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+      let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
       ticketAberto = ticketAberto.val()
-
-      if(ticketAberto === null) {
-        return;
-      }
         
       if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
           const embeda = new MessageEmbed()
