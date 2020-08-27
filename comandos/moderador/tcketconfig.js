@@ -1,10 +1,13 @@
 module.exports = {
     name: "ticketconfig",
     description: "crie um tiket",
-    run: async (client, message, database) => {
+    aliases: ["configticket"],
+    run: async (client, message) => {
       
   const { MessageEmbed } = require('discord.js');
   const prefix = require('../../config.json');
+  const firebase = require('firebase');
+  const database = firebase.database();
 
   const embedprinc = new MessageEmbed()
   .setTitle(`Olá ${message.author.username}!`)
@@ -143,7 +146,6 @@ module.exports = {
     
 
             canal.send(embedf).then(msg => {
-          
                 database.ref(`Servidores/${message.guild.id}/Ticket/Categoria`).set(categoria)
                 database.ref(`Servidores/${message.guild.id}/Ticket/canal`).set(canal.id)
                 database.ref(`Servidores/${message.guild.id}/Ticket/Cargo`).set(Cargo.id)
