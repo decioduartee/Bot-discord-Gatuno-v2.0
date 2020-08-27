@@ -115,7 +115,9 @@ module.exports = {
             } catch {
                 let roleadds2 = cargosAntesDoMute
                 if (!roleadds2) return;
-                membro.roles.add(roleadds2)                            
+              membro.roles.add(roleadds2).then(function() {
+                db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove() 
+              })                           
             }
 
             const desmutado = new MessageEmbed()
@@ -156,8 +158,6 @@ module.exports = {
             let user = args.shift()
             let banned = bans.find(ban => ban.user.username.toLocaleLowerCase().includes(user.toLowerCase()) || ban.user.id === user)
             let userFetch = await client.users.fetch(banned.user.id);
-
-            console.log(userFetch)
 
             message.guild.members.unban(userFetch.id, {reason: motivo});
 
