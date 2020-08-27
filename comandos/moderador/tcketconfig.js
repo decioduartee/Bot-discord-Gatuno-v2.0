@@ -100,7 +100,7 @@ module.exports = {
                     .on('collect', c => {
                         const title = c.content
 
-        const embeda = new Discord.MessageEmbed()
+        const embeda = new MessageEmbed()
       
             .setTitle('FINALIZAÇÃO')
             .setDescription('Deseja habilitar o sistema?\n\nCaso queira, reaja com: ✅!\n Caso queira desabilitar o sistema, reaja com: ❎!')
