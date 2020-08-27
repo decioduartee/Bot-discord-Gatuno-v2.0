@@ -95,7 +95,7 @@ client.on('raw', async dados => {
         return;
       }
         
-      if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
+      /* if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
           const embeda = new MessageEmbed()
               .setColor("#2f3136")
               .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você já possui um Ticket em aberto! \n • **Mensagem:** Para criar outro feche o que está em aberto.`)
@@ -108,7 +108,7 @@ client.on('raw', async dados => {
           })
       })
         
-      } else {                                                                    
+      } else { */                                                                   
       
       servidor.channels.create(`ticket-${membro.user.username}`, {type: "text"
         }).then(x => {
@@ -139,7 +139,7 @@ client.on('raw', async dados => {
         })
       }
     }
-  }     
+  //}     
 })
 /*
 client.on("message", async message => {
