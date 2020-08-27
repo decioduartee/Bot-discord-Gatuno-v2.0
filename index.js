@@ -86,13 +86,6 @@ client.on('raw', async dados => {
     return;
   }
 
-  let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
-  ticketAberto = ticketAberto.val()
-
-  if(ticketAberto === null) {
-    return;
-  }
-
   if(dados.d.message_id != mensagem) return;
 
   const servidor = client.guilds.cache.get(servidorID)
@@ -104,6 +97,13 @@ client.on('raw', async dados => {
       if(['🎫'].includes(dados.d.emoji.name)) {
         
       if(client.users.cache.get(dados.d.user_id).bot) {
+        return;
+      }
+
+      let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+      ticketAberto = ticketAberto.val()
+
+      if(ticketAberto === null) {
         return;
       }
         
