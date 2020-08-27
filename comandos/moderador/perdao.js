@@ -110,7 +110,8 @@ module.exports = {
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
                 membro.roles.add(roleadds)
-                return db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+                db.ref(`/Servidores/${message.guild.id}/Cargos/CargosMute/CargosAntesDoMute/${membro.user.id}`).remove(); 
+              return;
             })
             } catch {
                 let roleadds2 = cargosAntesDoMute
