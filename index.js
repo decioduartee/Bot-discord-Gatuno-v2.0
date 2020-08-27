@@ -36,24 +36,20 @@ client.eventos = new Map();
 
 ["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
-/* client.on('messageReactionRemove', (reaction, user) => {
+client.on('messageReactionRemove', (reaction, user) => {
     
   if(user.bot) return;
   
-    if (reaction.emoji.name === '🎫') {
-      reaction.message.guild.members.fetch(user.id).then(x => {
-        reaction.users.remove(user)
-      });
-    };
-}) */
+  if (reaction.emoji.name === '🎫') {
+    reaction.message.guild.members.fetch(user.id).then(x => {
+      reaction.users.remove(user)
+    });
+  }
+})
 
 client.on('raw', async dados => {
 
-  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(dados.t)) return;
-
-  if (dados.t === 'MESSAGE_REACTION_ADD') {
-    client.emit('messageReactionAdd', reaction, user, reaction.users.remove(user))
-  }
+  if(dados.t !== "MESSAGE_REACTION_ADD") return;
 
   let categoria = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Categoria`).once('value')
   categoria = categoria.val()
