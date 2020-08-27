@@ -98,14 +98,14 @@ module.exports = {
             try {
             membro.roles.remove(muterole.id).then(() => {
                 const embed = new MessageEmbed()
-                    .setColor("#2f3136")
-                    .setThumbnail(message.guild.iconURL({ format: "png", size: 2048, dynamic: true }))
-                    .setDescription(`Olá, você acaba de ser Desmutado`)
-                    .addField('Servidor', `• ${message.guild.name}`)
-                    .addField("Moderador responsavel", `• ${message.author} | ${message.author.username}`)
-                    .addField('Motivo', `• ${motivo || "Nenhum motivo definido"}`)
-                    .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-                    .setTimestamp()
+                  .setColor("#2f3136")
+                  .setThumbnail(message.guild.iconURL({ format: "png", size: 2048, dynamic: true }))
+                  .setDescription(`Olá, você acaba de ser Desmutado`)
+                  .addField('Servidor', `• ${message.guild.name}`)
+                  .addField("Moderador responsavel", `• ${message.author} | ${message.author.username}`)
+                  .addField('Motivo', `• ${motivo || "Nenhum motivo definido"}`)
+                  .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                  .setTimestamp()
                 membro.send(embed).catch(() => null)
                 let roleadds = cargosAntesDoMute
                 if (!roleadds) return;
