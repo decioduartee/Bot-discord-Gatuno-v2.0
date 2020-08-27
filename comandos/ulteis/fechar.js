@@ -14,7 +14,8 @@ module.exports = {
     } else {
 
         let embed = new MessageEmbed()
-          .setAuthor(`VOCÊ DESEJA MESMO FECHAR O TICKET EM ABERTO?`, message.author.displayAvatarURL({ dynamic: true }))
+            .setColor("#2f3136")
+            .setAuthor(`VOCÊ DESEJA MESMO FECHAR O TICKET EM ABERTO?`, message.author.displayAvatarURL({ dynamic: true }))
         message.channel.send(embed).then(async msg => {
           msg.react("✅");
           msg.react("❎");
