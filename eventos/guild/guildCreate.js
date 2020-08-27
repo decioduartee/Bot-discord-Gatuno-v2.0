@@ -46,5 +46,3 @@ module.exports = async (client, guild) => {
 
   client.users.cache.get("683555315957891149").send(embed);
 };
-
-const { MessageEmbed } = require('discord.js');
