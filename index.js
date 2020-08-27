@@ -100,7 +100,7 @@ client.on('raw', async dados => {
         return;
       }
 
-      let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+      let ticketAberto = database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
       ticketAberto = ticketAberto.val()
 
       if(ticketAberto === null) {
