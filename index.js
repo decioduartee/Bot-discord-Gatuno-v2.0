@@ -35,19 +35,6 @@ client.eventos = new Map();
 
 ["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
-
-client.on('messageReactionAdd', (reaction, user) => {
-  let message = reaction.message, emoji = reaction.emoji;
-  
-  if(user.bot) return;
-
-  if (emoji.name == '🎫') {
-      message.guild.members.fetch(user.id).then(x => {
-        reaction.users.remove(user)
-    });
-  }
-});
-
 client.on('raw', async dados => {
 
   if(dados.t !== "MESSAGE_REACTION_ADD") return;
@@ -87,12 +74,12 @@ client.on('raw', async dados => {
     return;
   }
 
-  let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
-  ticketAberto = ticketAberto.val()
+  //let ticketAberto = await database.ref(`Servidores/${dados.d.guild_id}/TicketAberto/${dados.d.user_id}`).once('value')
+  //ticketAberto = ticketAberto.val()
 
-  if(ticketAberto === null) {
-      return;
-  }
+  //if(ticketAberto === null) {
+      //return;
+  //}
 
   if(dados.d.message_id != mensagem) return;
 
@@ -121,21 +108,7 @@ client.on('raw', async dados => {
           })
       })
         
-      } else {
-                                                                        
-      /* if(userTickets.has(membro.id) || servidor.channels.cache.some(channel => channel.id === teste)) {
-        const embeda = new MessageEmbed()
-          .setTitle('ERROR')
-          .setDescription('Você já possui um ticket aberto!')
-          .setFooter(`Reação adicionada por: ${membro.user.username}`, membro.user.displayAvatarURL())
-        client.users.fetch(membro.id,false).then(user => {
-          user.send(embeda).then(c => {
-            setTimeout(() => {
-            c.delete()
-            }, 8000)
-          })
-        })    
-      } else { */
+      } else {                                                                    
       
       servidor.channels.create(`ticket-${membro.user.username}`, {type: "text"
         }).then(x => {
@@ -152,8 +125,7 @@ client.on('raw', async dados => {
           .setFooter(`Ticket aberto por: ${membro.user.username}`, membro.user.displayAvatarURL({ dynamic: true }))
         x.send(`${membro} & <@&${role}>`, embedx).then(msg => {
             msg.react('❎')
-          const FecharA = (reaction, user, ) => reaction.emoji.name === '❎' && user.id ===
-              membro.user.id;
+          const FecharA = (reaction, user, ) => reaction.emoji.name === '❎' && user.id === membro.user.id;
           const Fechar = msg.createReactionCollector(FecharA)
 
           Fechar.on('collect', r2 => {
@@ -162,13 +134,11 @@ client.on('raw', async dados => {
               setTimeout(() => {
                   x.delete()
               }, 5000)
-        
-                      })
-                  })
-              })
-            //}
-          }
+            })
+          })
+        })
       }
+    }
   }     
 })
 /*
