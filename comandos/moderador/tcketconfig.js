@@ -148,7 +148,7 @@ module.exports = {
 
             canal.send(embedf).then(msg => {
                 database.ref(`Servidores/${message.guild.id}/Ticket/Categoria`).set(categoria)
-                database.ref(`Servidores/${message.guild.id}/Ticket/canal`).set(canal.id)
+                database.ref(`Servidores/${message.guild.id}/Ticket/Canal`).set(canal.id)
                 database.ref(`Servidores/${message.guild.id}/Ticket/Cargo`).set(cargo.id)
                 database.ref(`Servidores/${message.guild.id}/Ticket/Mensagem`).set(msg.id)
                 database.ref(`Servidores/${message.guild.id}/Ticket/Servidor`).set(msg.guild.id)

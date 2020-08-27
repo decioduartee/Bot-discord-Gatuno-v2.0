@@ -35,6 +35,19 @@ client.eventos = new Map();
 
 ["comando", "eventos"].forEach(handler => { require(`./handlers/${handler}`)(client) });
 
+
+client.on('messageReactionAdd', (reaction, user) => {
+  let message = reaction.message, emoji = reaction.emoji;
+  
+  if(user.bot) return;
+
+  if (emoji.name == '🎫') {
+      message.guild.members.fetch(user.id).then(x => {
+        reaction.users.remove(user)
+    });
+  }
+});
+
 client.on('raw', async dados => {
 
   if(dados.t !== "MESSAGE_REACTION_ADD") return;
