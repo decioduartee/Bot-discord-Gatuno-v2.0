@@ -79,31 +79,24 @@ module.exports = {
               cargosAntesDoMute = cargosAntesDoMute.val()
             if (!cargosAntesDoMute) return;
 
-            if (!muteerole){
+            if (!muterole){
               const embed = new MessageEmbed()
                 .setColor("#2f3136")
-                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${muteerole} ]** para remover!`)
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${muterole} ]** para remover!`)
                 .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
                 .setTimestamp()
-            return message.channel.send(embed)
-            }
-
-            if (!cargoMute){
-              const embed = new MessageEmbed()
-                .setColor("#2f3136")
-                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não possui o cargo **[ ${cargoMute} ]** para remover!`)
-                .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-                .setTimestamp()
-            return message.channel.send(embed)
+              message.channel.send(embed)
+              return;
             }
 
             if (!membro.roles.cache.has(muterole.id)) {
               const embed = new MessageEmbed()
-              .setColor("#2f3136")
-              .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está mutado!`)
-              .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-              .setTimestamp()
-            return message.channel.send(embed)
+                .setColor("#2f3136")
+                .setDescription(`<:errado:736447664329326613> **| ERRO AO PERDOAR**\n **• Informações** \n **Mensagem:** Esse membro não está mutado!`)
+                .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                .setTimestamp()
+              message.channel.send(embed)
+              return;
             }
 
             try {
@@ -111,7 +104,7 @@ module.exports = {
                 const embed = new MessageEmbed()
                   .setColor("#2f3136")
                   .setThumbnail(message.guild.iconURL({ format: "png", size: 2048, dynamic: true }))
-                  .setDescription(`Olá, você acaba de ser Desmutado`)
+                  .setDescription(`**Olá, você acaba de ser Desmutado**`)
                   .addField('Servidor', `• ${message.guild.name}`)
                   .addField("Moderador responsavel", `• ${message.author} | ${message.author.username}`)
                   .addField('Motivo', `• ${motivo || "Nenhum motivo definido"}`)
