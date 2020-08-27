@@ -1,4 +1,4 @@
-module.exports = async (member, message) => {
+module.exports = async (reaction, user) => {
 
 let message = reaction.message, emoji = reaction.emoji;
   
