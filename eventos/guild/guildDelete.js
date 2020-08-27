@@ -1,6 +1,9 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
+const firebase = require('firebase')
+const database = firebase.database()
+
 module.exports = async (client, guild) => {
-  let embed = new Discord.MessageEmbed()
+  let embed = new MessageEmbed()
     .setAuthor(`Fui removido de um servidor`, client.user.displayAvatarURL())
     .setThumbnail(guild.iconURL({ format: "png", size: 2048, dynamic: true }))
     .addField(`**Servidor**`, guild.name, true)
