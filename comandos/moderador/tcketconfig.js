@@ -163,7 +163,7 @@ module.exports = {
             database.ref(`Servidores/${message.guild.id}/Ticket/Mensagem`).remove()
             database.ref(`Servidores/${message.guild.id}/Ticket/Servidor`).remove()
 
-            const embed10 = new Discord.MessageEmbed()
+            const embed10 = new MessageEmbed()
   
                 .setColor("#2f3136")
                 .setDescription(`<:certo:736447597102760007> **| SUCESSO AO CANCELAR** \n • **Informações:** \n • **Mensagem:** Sistema de Ticket desativado com sucesso!`)
