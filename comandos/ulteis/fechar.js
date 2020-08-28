@@ -9,7 +9,7 @@ module.exports = {
         let ticketAberto = await database.ref(`Servidores/${message.guild.id}/TicketAberto/${message.author.id}`).once('value')
         ticketAberto = ticketAberto.val()
 
-        let servidorID = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Servidor`).once('value')
+        let servidorID = await database.ref(`Servidores/${message.guild.id}/Ticket/Servidor`).once('value')
         servidorID = servidorID.val()
 
         const servidor = client.guilds.cache.get(servidorID)
