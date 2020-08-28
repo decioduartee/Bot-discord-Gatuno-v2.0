@@ -26,23 +26,23 @@ module.exports = async (client, guild) => {
 
   let embed = new MessageEmbed()
     .setAuthor(`Fui removido de um servidor`, client.user.displayAvatarURL())
-    .setThumbnail(guild.iconURL({ format: "png", size: 2048, dynamic: true }))
+    .setThumbnail(guild.iconURL({ dynamic: true }))
     .addField(`**Servidor**`, guild.name, true)
     .addField(`**Dono**`, `${guild.owner} | ${guild.owner.user.username}` , true)
     .addField(`**ID**`, `${guild.id}`, true)
     .addField(
       `**CANAIS**`,
-      `• Total de Canais ${
+      `• Total de Canais » ${
         totalchannel
-      }\n • Total de Categorias ${
+      }\n • Total de Categorias » ${
         categorycount
-      }\n • Canais de Mensagem ${
+      }\n • Canais de Mensagem » ${
         textcount
-      }\n • Canais de Voz ${
+      }\n • Canais de Voz » ${
         vccount
-      }\n • Canais de Loja ${
+      }\n • Canais de Loja » ${
         storecount
-      }\n • Canais de Notícias ${
+      }\n • Canais de Notícias » ${
         newscount
       }`, true
     )
