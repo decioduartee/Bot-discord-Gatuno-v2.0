@@ -9,7 +9,7 @@ module.exports = async (client, guild) => {
   let newscount = 0;
   let storecount = 0;
   let categorycount = 0;
-  let totalchannel = message.guild.channels.cache.size.toLocaleString()
+  let totalchannel = guild.channels.cache.size.toLocaleString()
   guild.channels.cache.map(c => {
     if (c.type === "text") {
       textcount += 1;
