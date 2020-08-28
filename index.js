@@ -107,7 +107,7 @@ client.on('raw', async dados => {
       if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
           const embeda = new MessageEmbed()
               .setColor("#2f3136")
-              .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você já possui um Ticket em aberto! \n • **Mensagem:** Para criar outro feche o que está em aberto.`)
+              .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você já possui um Ticket em aberto! \n • **Mensagem:** Para criar outro feche o que está em aberto. \n • **Bonus:** Canal aberto [ <#${ticketAberto}> ]`)
               .setFooter(`Reação adicionada por: ${membro.user.username}`, membro.user.displayAvatarURL({ dynamic: true }))
           client.users.fetch(membro.id,false).then(user => {
           user.send(embeda).then(c => {
