@@ -113,7 +113,7 @@ client.on('raw', async dados => {
           user.send(embeda).then(c => {
               setTimeout(() => {
                   c.delete()
-              }, 10000)
+              }, 40000)
           })
       })
         
