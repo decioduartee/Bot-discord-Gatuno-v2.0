@@ -8,6 +8,11 @@ module.exports = {
 
         let ticketAberto = await database.ref(`Servidores/${message.guild.id}/TicketAberto/${message.author.id}`).once('value')
         ticketAberto = ticketAberto.val()
+
+        let servidorID = await database.ref(`Servidores/${dados.d.guild_id}/Ticket/Servidor`).once('value')
+        servidorID = servidorID.val()
+
+        const servidor = client.guilds.cache.get(servidorID)
       
     if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
         return message.reply("você não tem nenhum **Ticket** em aberto!").then(msg => msg.delete({ timeout: 5000 }))
