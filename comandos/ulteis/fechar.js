@@ -14,7 +14,7 @@ module.exports = {
 
         const servidor = client.guilds.cache.get(servidorID)
       
-    if(servidor.channels.cache.find(x => x.id === ticketAberto)) {
+    if(!servidor.channels.cache.find(x => x.id === ticketAberto)) {
         return message.reply("você não tem nenhum **Ticket** em aberto!").then(msg => msg.delete({ timeout: 5000 }))
     } else {
 
