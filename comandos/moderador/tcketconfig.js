@@ -5,7 +5,7 @@ module.exports = {
     run: async (client, message) => {
       
   const { MessageEmbed } = require('discord.js');
-  const prefix = require('../../config.json');
+  const { prefix } = require('../../config.json');
   const firebase = require('firebase');
   const database = firebase.database();
 
