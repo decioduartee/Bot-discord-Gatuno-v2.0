@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = {
         name: "invite",
-        aliases: ['invites', 'invi'],
+        aliases: ['invites', 'convites'],
         category: "info",
         description: "Mostra usuários ingressados por meio de convites de alguém",
         userPerm: ["MANAGE_MESSAGES"],
