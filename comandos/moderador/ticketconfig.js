@@ -60,7 +60,7 @@ module.exports = {
     .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
     .setTimestamp()
 
-const erro2 = new MessageEmbed()
+  const erro3 = new MessageEmbed()
     .setColor("#2f3136")
     .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você deve me informar apenas o **ID**! \n • **Mensagem:** Para tentar novamente, use: ${prefix}configticket`)
     .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
@@ -88,7 +88,7 @@ const erro2 = new MessageEmbed()
     .on('collect', c => {
         const categoria = c.content
         if (isNaN(categoria)) {
-            return message.channel.send(erro2)
+            return message.channel.send(erro3)
         } else {
         message.channel.send(canal).then(msg1 => {
         let up2 = message.channel.createMessageCollector(x => x.author.id == message.author.id, {max: 1})
