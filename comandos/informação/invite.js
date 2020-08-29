@@ -22,7 +22,7 @@ module.exports = {
                     .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
                     .addField('• Informações', `• **Membro:** ${member.user} \n • **Mensagem:** Você não convidou ninguém para o servidor!`)
                     .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-                message.channel.send(embed)
+                return message.channel.send(embed)
             }
 
             let index = 0;
@@ -34,7 +34,7 @@ module.exports = {
                 .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
                 .addField(`• Informações`, `• **Mensagem:** Pessoas Convidadas por ${member.user} \n • **Pessoa convidadas:** ${index}`)
                 .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
-            message.channel.send(embed);
+            return message.channel.send(embed);
         } catch (e) {
             return;
         }
