@@ -4,10 +4,9 @@ moment.locale('pt-BR')
 
 module.exports = {
   name: "channelinfo",
-  category: "Utility",
-  description: "Lists the information about a specified channel.",
+  category: "informações",
+  description: "informações de canais",
   aliases: ["ci"],
-  usage: "[channel]",
   run: async (client, message, args) => {
 
     if (!args[0]) {
