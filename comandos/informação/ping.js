@@ -11,6 +11,7 @@ module.exports = {
         .setDescription(`<:ontime:733535248041771009> **PONG**`)
         .addField(`**PING DA API**`, `• ${client.ws.ping}ms.`)
         .addField(`**TEMPO DE RESPOSTA**`, `• ${Date.now() - message.createdTimestamp}ms.`)
+        .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL());
         message.channel.send(embed)
     }
 } 

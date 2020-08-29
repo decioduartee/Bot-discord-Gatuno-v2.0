@@ -6,6 +6,8 @@ module.exports = {
         aliases: ['invites', 'invi'],
         category: "info",
         description: "Mostra usuários ingressados por meio de convites de alguém",
+        userPerm: ["MANAGE_MESSAGES"],
+        botPerm: ["MANAGE_MESSAGES"],
     run: async (bot, message, args) => {
         try {
             let member = await message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.guild.members.cache.find(r => r.displayName.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.member;
@@ -31,6 +33,8 @@ module.exports = {
                 .setDescription(`Pessoas Convidadas por ${member.user}`)
                 .addField("**Pessoa convidadas**", index)
             message.channel.send(embed);
-        } catch (e) { return message.channel.send(`Erro detectado: ${e}`) }
+        } catch (e) {
+
+        }
     }
 };
