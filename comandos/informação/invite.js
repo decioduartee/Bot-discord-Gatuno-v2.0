@@ -7,7 +7,7 @@ module.exports = {
         description: "Mostra usuários ingressados por meio de convites de alguém",
         userPerm: ["MANAGE_MESSAGES"],
         botPerm: ["MANAGE_MESSAGES"],
-    run: async (bot, message, args) => {
+    run: async (client, message, args) => {
         try {
             let member = await message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.guild.members.cache.find(r => r.displayName.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.member;
 
@@ -18,7 +18,7 @@ module.exports = {
             if (memberInvites.size <= 0) {
                 let embed = new Discord.MessageEmbed()
                     .setColor("#2f3136")
-                    .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                    .setThumbnail(member.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                     .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
                     .addField('• Informações', `• **Membro:** ${member.user} \n • **Mensagem:** Você não convidou ninguém para o servidor!`)
                     .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
@@ -29,8 +29,8 @@ module.exports = {
             memberInvites.forEach(invite => index += invite.uses);
 
             let embed = new Discord.MessageEmbed()
-            setColor("#2f3136")
-                .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                .setColor("#2f3136")
+                .setThumbnail(member.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
                 .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
                 .addField(`• Informações`, `• **Mensagem:** Pessoas Convidadas por ${member.user} \n • **Pessoa convidadas:** ${index}`)
                 .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
