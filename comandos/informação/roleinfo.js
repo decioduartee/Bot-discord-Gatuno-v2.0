@@ -15,7 +15,8 @@ module.exports = {
 
     if (!args[0]) {
         let roleembed = new Discord.MessageEmbed()
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO`)
+            .setColor('#2f3136')
+            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO**`)
             .addField(`• **Informações`, `• Mensagem: Por favor me informe um cargo/role.`)
             .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL());
         return message.channel.send(roleembed)
@@ -25,7 +26,8 @@ module.exports = {
 
     if (!role) {
         let roleembed = new Discord.MessageEmbed()
-            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO`)
+            .setColor('#2f3136')
+            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO**`)
             .addField(`• **Informações`, `• Mensagem: Por favor me informe um cargo/role valida!`)
             .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL());
         return message.channel.send(roleembed)
