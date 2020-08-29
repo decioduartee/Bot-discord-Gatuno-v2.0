@@ -42,10 +42,9 @@ module.exports = {
         })
             
         cancelar.on("collect", async r => {
-            msg.delete()
-            message.channel.send("O encerramento do **Ticket** foi cancelada!").then(msg => msg.delete({ timeout: 5000 }))
+          msg.delete()
+          message.channel.send("O encerramento do **Ticket** foi cancelada!").then(msg => msg.delete({ timeout: 5000 }))
         })
-          
       })        
     } 
   }
