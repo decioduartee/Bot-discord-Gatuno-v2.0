@@ -17,24 +17,27 @@ module.exports = {
             let memberInvites = invites.filter(i => i.inviter && i.inviter.id === member.user.id);
 
             if (memberInvites.size <= 0) {
-             return message.channel.send({embed: {
-                color: '#206694',
-                description: (`**${member.user} não convidou ninguém para o servidor!**`)
-              }})
+                let embed = new Discord.MessageEmbed()
+                    .setColor("#2f3136")
+                    .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                    .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
+                    .addField('• Informações', `• **Membro:** ${member.user} \n • **Mensagem:** Você não convidou ninguém para o servidor!`)
+                    .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
+                message.channel.send(embed)
             }
 
             let index = 0;
             memberInvites.forEach(invite => index += invite.uses);
 
             let embed = new Discord.MessageEmbed()
-                .setColor('#206694')
-                .setFooter(message.guild.name, message.guild.iconURL({dynamic: true}))
-                .setAuthor(`Informações sobre convites do ${message.guild.name}`)
-                .setDescription(`Pessoas Convidadas por ${member.user}`)
-                .addField("**Pessoa convidadas**", index)
+            setColor("#2f3136")
+                .setThumbnail(membro.user.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+                .setDescription(`<:certo:736447597102760007> **| INFORMAÇÕES DE CONVITES**`)
+                .addField(`• Informações`, `• **Mensagem:** Pessoas Convidadas por ${member.user} \n • **Pessoa convidadas:** ${index}`)
+                .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL())
             message.channel.send(embed);
         } catch (e) {
-
+            return;
         }
     }
 };
