@@ -13,11 +13,23 @@ module.exports = {
   usage: "<role>",
   run: async (client, message, args) => {
 
-    if (!args[0]) return message.channel.send(":x: | You didn't provide a role.");
+    if (!args[0]) {
+        let roleembed = new Discord.MessageEmbed()
+            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO`)
+            .addField(`• **Informações`, `• Mensagem: Por favor me informe um cargo/role.`)
+            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL());
+        return message.channel.send(roleembed)
+    }
 
-    let role = message.mentions.roles.first()
+    let role = await message.mentions.roles.first() || message.guild.roles.cache.get(args[0]) || message.guild.roles.cache.find(r => r.user.username.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.guild.roles.cache.find(r => r.displayName.toLowerCase() === args.join(' ').toLocaleLowerCase())
 
-    if (!role) return message.channel.send(":x: | You didn't provide a true role.");
+    if (!role) {
+        let roleembed = new Discord.MessageEmbed()
+            .setDescription(`<:errado:736447664329326613> **| ERRO AO VER ROLEINFO`)
+            .addField(`• **Informações`, `• Mensagem: Por favor me informe um cargo/role valida!`)
+            .setFooter(`Atenciosamente, ${client.user.username}`, client.user.displayAvatarURL());
+        return message.channel.send(roleembed)
+    }
 
     let total = 0;
     message.guild.members.cache.forEach(member => {
