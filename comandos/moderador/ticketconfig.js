@@ -60,6 +60,13 @@ module.exports = {
     .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
     .setTimestamp()
 
+const erro2 = new MessageEmbed()
+    .setColor("#2f3136")
+    .setDescription(`<:errado:736447664329326613> **| ERROR AO CRIAR O TICKET** \n •**Informações** \n • **Erro:** Você deve me informar apenas o **ID**! \n • **Mensagem:** Para tentar novamente, use: ${prefix}configticket`)
+    .setThumbnail(message.author.displayAvatarURL({ format: "png", size: 2048, dynamic: true }))
+    .setFooter(`Atenciosamente, ${client.user.username}`,client.user.displayAvatarURL())
+    .setTimestamp()
+
   const mensagem = new MessageEmbed()
     .setTitle('MENSAGEM')
     .setColor("#2f3136")
@@ -79,7 +86,10 @@ module.exports = {
   message.channel.send(categoriaID).then(msg => {
     let up1 = message.channel.createMessageCollector(x => x.author.id == message.author.id, {max: 1})
     .on('collect', c => {
-            const categoria = c.content
+        const categoria = c.content
+        if (isNaN(categoria)) {
+            return message.channel.send(erro2)
+        } else {
         message.channel.send(canal).then(msg1 => {
         let up2 = message.channel.createMessageCollector(x => x.author.id == message.author.id, {max: 1})
         .on('collect', c => {
@@ -177,18 +187,19 @@ module.exports = {
 
             message.channel.send(embed10)
 
+                                                                })
                                                             })
                                                         })
                                                     })
                                                 })
                                             })
-                                        })
-                                    }
+                                        }
+                                    })
                                 })
-                            })
-                        }
+                            }
+                        })
                     })
-                })
+                }
             })
         })
         
