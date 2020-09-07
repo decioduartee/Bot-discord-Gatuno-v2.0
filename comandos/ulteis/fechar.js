@@ -13,6 +13,7 @@ module.exports = {
         servidorID = servidorID.val()
 
         const servidor = client.guilds.cache.get(servidorID)
+        const DeleteChannel = message.guild.channels.cache.find(c => c.id === ticketAberto)
       
     if(!servidor.channels.cache.find(x => x.id === ticketAberto)) {
         return message.reply("você não tem nenhum **Ticket** em aberto!").then(msg => msg.delete({ timeout: 5000 }))
@@ -35,8 +36,8 @@ module.exports = {
             msg.delete()
             message.channel.send("O **Ticket** será encerrado em 5 segundos..")
             
-            setTimeout(function(){
-              message.channel.delete()
+            setTimeout(function() {
+              DeleteChannel.delete()
               database.ref(`Servidores/${message.guild.id}/TicketAberto/${message.author.id}`).remove()
             }, 5000)
         })
